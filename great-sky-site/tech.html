@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology - Great Sky AI</title>
+  <meta name="description" content="Why new hardware is needed for AI, how superconductors and light address scaling issues, and the performance this enables.">
+  <meta property="og:title" content="Technology - Great Sky AI">
+  <meta property="og:description" content="Why new hardware is needed for AI, how superconductors and light address scaling issues, and the performance this enables.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FAF8F5">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body id="top">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link" aria-label="Great Sky AI — home">
+        <img src="/assets/great-sky-logo.svg" alt="Great Sky" class="logo logo-dark">
+        <img src="/assets/great-sky-logo-cream.svg" alt="" class="logo logo-cream" aria-hidden="true">
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="/tech" class="active">Tech</a>
+        <a href="/about">About</a>
+        <a href="/careers">Careers</a>
+        <a href="/news">News</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/contact" class="btn btn-pill btn-small">
+          <span>Contact</span>
+          <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-menu">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+    <nav class="overlay-nav" aria-label="Menu">
+      <a href="/"><em>01</em>Home</a>
+      <a href="/tech"><em>02</em>Tech</a>
+      <a href="/about"><em>03</em>About</a>
+      <a href="/careers"><em>04</em>Careers</a>
+      <a href="/news"><em>05</em>News</a>
+      <a href="/contact"><em>06</em>Contact</a>
+    </nav>
+    <div class="overlay-foot">
+      <span>Great Sky AI, Inc.</span>
+      <span>Boulder, Colorado</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero">
+      <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.4;" aria-hidden="true"></div>
+      <div class="hero-sky" aria-hidden="true">
+        <svg class="sky-arcs" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" fill="none">
+          <g class="arc-group">
+            <circle cx="800" cy="1450" r="780"  stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
+            <circle cx="800" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
+            <circle cx="800" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
+          </g>
+        </svg>
+      </div>
+      <div class="container">
+        <p class="eyebrow reveal"><span class="eyebrow-dot"></span>Technology</p>
+        <h1 class="page-title reveal">Intelligence requires its own <em>hardware</em></h1>
+        <p class="page-lede reveal" data-delay="1">Superconductors and light operate at the physical limits of AI. The result is 300x reduction in cost of LLM tokens and a million x lower cost for video analysis.</p>
+      </div>
+    </section>
+
+    <!-- ============ 01 THE CONSTRAINT ============ -->
+    <section class="section section-wall">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split">
+          <h2 class="display reveal">Conventional chips constrain <em>intelligence</em></h2>
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">Silicon transistors representing binary digits are excellent for crunching numbers, but are not well matched to intelligence.</p>
+            <p class="body-text reveal" data-delay="2">Modern computer architectures separate information processing from memory storage, leading to excessive data movement. Communication within and between chips requires serial movement of data packets through congested routing networks. All these design choices make sense for general-purpose processors, but they're poorly matched to the needs of intelligence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 PRINCIPLES ============ -->
+    <section class="section section-intro">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split split-reverse">
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">Representing information as continuously varying analog signals instead of binary digits is a better substrate for the fluid operations of intelligence.</p>
+            <p class="body-text reveal" data-delay="2">Superconducting circuits based on Josephson junctions naturally support high-accuracy, low-noise analog computations. These circuits also seamlessly integrate processing and memory, storing synaptic weights right where they're needed, eliminating the primary requirement for data movement in AI. For communication across large neural networks, light is ideal, and integrating photonics with superconductors is straightforward and performant.</p>
+            <p class="body-text reveal" data-delay="3">Our hardware combines analog superconducting circuits with distributed, dynamic memory and integrated-photonic communication. The result is a platform with extraordinary speed and energy efficiency, low cost of manufacturing, and a new pathway to exponential scaling.</p>
+          </div>
+          <h2 class="display reveal">Principles of intelligence, realized in <em>hardware</em></h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 THREE-PART ARCHITECTURE (OLIVE) ============ -->
+    <section class="section section-dark section-olive" id="architecture">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split">
+          <h2 class="display reveal">The Three-Part <em>Architecture</em></h2>
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">Leveraging the complementary strengths of electrons and photons</p>
+          </div>
+        </div>
+        <div class="arch-grid">
+          <div class="arch-col reveal" data-delay="1">
+            <p class="arch-tag">01 / Computation</p>
+            <h3 class="arch-name">Superconductors</h3>
+          </div>
+          <div class="arch-col reveal" data-delay="2">
+            <p class="arch-tag">02 / Communication</p>
+            <h3 class="arch-name">Photonics</h3>
+          </div>
+          <div class="arch-col reveal" data-delay="3">
+            <p class="arch-tag">03 / Control</p>
+            <h3 class="arch-name">Semiconductors</h3>
+          </div>
+        </div>
+        <div class="waveguide reveal" data-delay="2" aria-hidden="true">
+          <svg viewBox="0 0 1200 2" preserveAspectRatio="none"><line x1="0" y1="1" x2="1200" y2="1" stroke="currentColor" stroke-width="1"/></svg>
+          <span class="photon"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 SOEN PRINCIPLES ============ -->
+    <section class="section section-brain">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split">
+          <h2 class="display reveal">Superconducting optoelectronic <em>networks</em></h2>
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">We build superconducting optoelectronic networks—SOENs. These are the foundational principles.</p>
+          </div>
+        </div>
+        <div class="row-list">
+          <div class="row-item reveal" data-delay="1">
+            <span class="row-num">01</span>
+            <h3 class="row-title">Architecture</h3>
+            <p class="row-body">The most important principle of hardware for AI is that the architecture of neural networks must be physically instantiated in hardware. It isn't enough to digitally emulate what neurons and synapses do. Chips must be based on circuits that actually perform the operations of neurons, synapses, and their extensive interconnectivity.</p>
+          </div>
+          <div class="row-item reveal" data-delay="2">
+            <span class="row-num">02</span>
+            <h3 class="row-title">Computation</h3>
+            <p class="row-body">Superconducting circuits are ideal for the purpose of functioning like neurons and synapses. The most prominent superconducting device is the Josephson junction, and simple circuits with two Josephson junctions naturally capture the behavior of these critical elements: they sum many inputs, they perform nonlinear transfer functions, and they implement synaptic weights. Josephson junctions have the highest speed-over-energy quotient of any circuit element, so there is no known way to compute faster with less energy.</p>
+          </div>
+          <div class="row-item reveal" data-delay="3">
+            <span class="row-num">03</span>
+            <h3 class="row-title">Memory</h3>
+            <p class="row-body">For neural networks, the most important role of memory is to store synaptic weights. With superconducting circuits, it is straightforward to store synaptic weights right at the circuit that uses that information, eliminating the primary data-movement requirement in conventional computer architectures. Josephson circuits solve this problem inherently.</p>
+          </div>
+          <div class="row-item reveal" data-delay="4">
+            <span class="row-num">04</span>
+            <h3 class="row-title">Communication</h3>
+            <p class="row-body">Neural networks require extensive connectivity—far beyond what can be achieved with copper wires directly. Using light for communication allows each neuron to make thousands of direct connections. Each of our neurons has its own light source and its own network of waveguides—tiny wires for light. Each synapse has a superconducting single-photon detector—the most sensitive light sensor in the world. With this approach, neurons achieve two physical limits: they communicate at the fastest speed in the universe, the speed of light; and they do this with the minimum possible optical energy—one photon per communication event.</p>
+          </div>
+        </div>
+        <div class="wall-divider reveal" data-delay="2" aria-hidden="true">
+          <svg viewBox="0 0 1200 100" fill="none" preserveAspectRatio="xMidYMid meet">
+            <path class="branch-line branch-trunk" d="M40 50 C 220 50, 260 27, 400 27" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-trunk" d="M40 50 C 220 50, 260 73, 400 73" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 27 C 700 27, 900 8, 1160 8" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 27 C 700 27, 900 24, 1160 24" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 27 C 720 27, 920 42, 1160 42" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 73 C 700 73, 900 58, 1160 58" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 73 C 700 73, 900 76, 1160 76" stroke="currentColor" stroke-width="1"/>
+            <path class="branch-line branch-leaf" d="M400 73 C 720 73, 920 92, 1160 92" stroke="currentColor" stroke-width="1"/>
+            <circle class="branch-dot branch-dot-root" cx="40" cy="50" r="3" fill="currentColor"/>
+            <circle class="branch-dot" cx="400" cy="27" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="400" cy="73" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="8" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="24" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="42" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="58" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="76" r="2" fill="currentColor"/>
+            <circle class="branch-dot" cx="1160" cy="92" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 SCALABILITY ============ -->
+    <section class="section section-wall">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split">
+          <h2 class="display reveal">Scalability</h2>
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">With these principles in place, we have a scalable architecture for profound intelligence.</p>
+            <p class="body-text reveal" data-delay="2">The exponential scaling of Moore's law has transformed society and fueled the economy for six decades. In that case, scaling was sustained through improvements in lithography as transistors were made smaller with each product generation. SOENs provide a new path to exponential growth—not by shrinking devices to the atomic scale, but by integrating ever more neural circuitry into larger systems.</p>
+            <p class="body-text reveal" data-delay="3">This is possible with Great Sky's hardware because of these principles: superconductors enable extreme speed with very low power density; they co-locate memory with processing to reduce data movement; and they communicate with single particles of light for extraordinary communication bandwidth while retaining energy efficiency. Our chips are manufactured on foundry nodes that were standard in 2005, keeping costs low, margins high, and making US production viable.</p>
+          </div>
+        </div>
+        <div class="growth-figure reveal" data-delay="2" aria-hidden="true">
+          <svg viewBox="0 0 1200 220" fill="none" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="204" x2="1180" y2="204" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-dasharray="1 6"/>
+            <path class="draw-line" d="M20 200 C 300 197, 520 190, 700 162 C 880 134, 1040 80, 1180 14" stroke="currentColor" stroke-width="1"/>
+            <circle class="draw-dot" cx="20" cy="200" r="3" fill="currentColor"/>
+            <circle class="draw-dot" cx="700" cy="162" r="2" fill="currentColor"/>
+            <circle class="draw-dot" cx="1040" cy="80" r="2" fill="currentColor"/>
+            <circle class="draw-dot" cx="1180" cy="14" r="2.5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 STATEMENT (DARK) ============ -->
+    <section class="section section-dark" style="overflow: hidden;">
+      <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-37.jpg'); opacity:0.12;" aria-hidden="true"></div>
+      <div class="container">
+        <div class="quote-block">
+          <p class="quote-text reveal">We're building the technology that will fuel the economy for the next century.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 THE NUMBERS ============ -->
+    <section class="section section-intro">
+      <div class="container">
+        <div class="section-head reveal">
+        </div>
+        <div class="split">
+          <h2 class="display reveal">Hardware and Architecture Transform the <em>Numbers</em></h2>
+          <div class="split-body">
+            <p class="lede reveal" data-delay="1">All figures derived from experimental data and published research.</p>
+          </div>
+        </div>
+        <div class="table-wrap reveal" data-delay="1">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col">Today's Best AI Hardware</th>
+                <th scope="col">Our Architecture</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric">Video inference speed</td>
+                <td class="today">30 frames per second</td>
+                <td class="ours">60 million frames per second <em>(2 million x improvement)</em></td>
+              </tr>
+              <tr>
+                <td class="metric">Video inference energy (10 min video)</td>
+                <td class="today">870,000 joules</td>
+                <td class="ours">192 Joules <em>(4,500 x improvement)</em></td>
+              </tr>
+              <tr>
+                <td class="metric">LLM cost per token</td>
+                <td class="today">$3 per 1M output tokens</td>
+                <td class="ours">$0.01 per 1M output tokens <em>(300x lower TCO)</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section section-dark cta-band" style="overflow: hidden;">
+      <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-38.jpg'); opacity:0.12;" aria-hidden="true"></div>
+      <div class="container">
+        <h2 class="display display-huge reveal">Contact us to try our <em>chip.</em></h2>
+        <div class="cta-band-actions reveal" data-delay="1">
+          <a href="/contact" class="btn btn-pill btn-cream" >
+              <span>Contact Us</span>
+              <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer section-dark" id="footer" style="padding-top: clamp(4rem, 7vw, 6rem); position: relative; overflow: hidden;">
+      <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-38.jpg'); opacity:0.13;" aria-hidden="true"></div>
+      <div class="container">
+        <div class="footer-grid" style="border-top: none;">
+          <div class="footer-brand">
+            <img src="/assets/great-sky-logo-cream.svg" alt="Great Sky" class="footer-logo">
+          </div>
+          <nav class="footer-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="/tech">Tech</a>
+            <a href="/about">About Us</a>
+            <a href="/careers">Careers</a>
+            <a href="/news">News</a>
+          </nav>
+          <nav class="footer-col" aria-label="Connect">
+            <h4>Connect</h4>
+            <a href="https://www.linkedin.com/company/great-sky-ai" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/greatskyai" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://bsky.app/profile/greatskyai.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+          </nav>
+          <nav class="footer-col" aria-label="Resources">
+            <h4>Resources</h4>
+            <a href="/news">Blog</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Great Sky AI, Inc.</span>
+          <span>Boulder, Colorado</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>

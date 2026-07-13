@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Great Sky AI</title>
+  <meta name="description" content="Let's talk. Partnerships, investment, research collaboration, press, and careers inquiries.">
+  <meta property="og:title" content="Contact Us - Great Sky AI">
+  <meta property="og:description" content="Let's talk. Partnerships, investment, research collaboration, press, and careers inquiries.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FAF8F5">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body id="top">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link" aria-label="Great Sky AI — home">
+        <img src="/assets/great-sky-logo.svg" alt="Great Sky" class="logo logo-dark">
+        <img src="/assets/great-sky-logo-cream.svg" alt="" class="logo logo-cream" aria-hidden="true">
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="/tech">Tech</a>
+        <a href="/about">About</a>
+        <a href="/careers">Careers</a>
+        <a href="/news">News</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/contact" class="btn btn-pill btn-small">
+          <span>Contact</span>
+          <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-menu">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+    <nav class="overlay-nav" aria-label="Menu">
+      <a href="/"><em>01</em>Home</a>
+      <a href="/tech"><em>02</em>Tech</a>
+      <a href="/about"><em>03</em>About</a>
+      <a href="/careers"><em>04</em>Careers</a>
+      <a href="/news"><em>05</em>News</a>
+      <a href="/contact"><em>06</em>Contact</a>
+    </nav>
+    <div class="overlay-foot">
+      <span>Great Sky AI, Inc.</span>
+      <span>Boulder, Colorado</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="page-hero" style="padding-bottom: clamp(6.5rem, 12vw, 11rem);">
+      <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.35;" aria-hidden="true"></div>
+      <div class="hero-sky" aria-hidden="true">
+        <svg class="sky-arcs" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" fill="none">
+          <g class="arc-group">
+            <circle cx="800" cy="1450" r="780"  stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
+            <circle cx="800" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
+            <circle cx="800" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
+          </g>
+        </svg>
+      </div>
+      <div class="container">
+        <div class="contact-layout">
+          <div>
+            <p class="eyebrow reveal"><span class="eyebrow-dot"></span>Contact</p>
+            <h1 class="page-title reveal" data-delay="1" style="max-width: 12ch;">Let's <em>talk</em></h1>
+            <p class="page-lede reveal" data-delay="2">Partnerships. Investment. Research collaboration. Press. Careers. We want to hear from the people who are serious about what we're building.</p>
+            <div class="contact-aside" style="margin-top: 3.5rem;">
+              <div class="contact-detail reveal" data-delay="3">
+                <h4>Location</h4>
+                <p>Boulder, Colorado</p>
+              </div>
+              <div class="contact-detail reveal" data-delay="4">
+                <h4>Connect</h4>
+                <p style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 1.15rem;">
+                  <a href="https://www.linkedin.com/company/great-sky-ai" target="_blank" rel="noopener" class="link-underline" style="font-family: var(--serif); width: fit-content;">LinkedIn</a>
+                  <a href="https://twitter.com/greatskyai" target="_blank" rel="noopener" class="link-underline" style="font-family: var(--serif); width: fit-content;">Twitter / X</a>
+                  <a href="https://bsky.app/profile/greatskyai.bsky.social" target="_blank" rel="noopener" class="link-underline" style="font-family: var(--serif); width: fit-content;">BlueSky</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-head reveal" data-delay="1">
+              <p class="eyebrow">Send a Message</p>
+              <h2 class="form-title">Tell us why you're here</h2>
+            </div>
+            <form class="form reveal" data-delay="2" id="contact-form" novalidate>
+              <div class="field-row">
+                <div class="field">
+                  <label for="cf-name">Name *</label>
+                  <input type="text" id="cf-name" name="name" required autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="cf-email">Email *</label>
+                  <input type="email" id="cf-email" name="email" required autocomplete="email">
+                </div>
+              </div>
+              <div class="field">
+                <label for="cf-org">Organization</label>
+                <input type="text" id="cf-org" name="organization" autocomplete="organization">
+              </div>
+              <div class="field field-select">
+                <label for="cf-type">Inquiry Type *</label>
+                <select id="cf-type" name="inquiry" required>
+                  <option value="" selected disabled>Select the nature of your inquiry</option>
+                  <option>Partnership</option>
+                  <option>Investment</option>
+                  <option>Research collaboration</option>
+                  <option>Press</option>
+                  <option>Careers</option>
+                  <option>General inquiry</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-message">Message *</label>
+                <textarea id="cf-message" name="message" required></textarea>
+              </div>
+              <div class="hp-field" aria-hidden="true">
+                <label for="cf-website">Leave blank</label>
+                <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+              <div>
+                <button type="submit" class="btn btn-pill btn-dark">
+                  <span>Send Message</span>
+                  <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+              </div>
+            </form>
+            <div class="form-success" id="form-success" role="status">
+              <h2 class="display">Message <em>received.</em></h2>
+              <p>Thank you for reaching out. Someone from the Great Sky team will be in touch shortly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer section-dark" id="footer" style="padding-top: clamp(4rem, 7vw, 6rem); position: relative; overflow: hidden;">
+      <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-38.jpg'); opacity:0.13;" aria-hidden="true"></div>
+      <div class="container">
+        <div class="footer-grid" style="border-top: none;">
+          <div class="footer-brand">
+            <img src="/assets/great-sky-logo-cream.svg" alt="Great Sky" class="footer-logo">
+          </div>
+          <nav class="footer-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="/tech">Tech</a>
+            <a href="/about">About Us</a>
+            <a href="/careers">Careers</a>
+            <a href="/news">News</a>
+          </nav>
+          <nav class="footer-col" aria-label="Connect">
+            <h4>Connect</h4>
+            <a href="https://www.linkedin.com/company/great-sky-ai" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/greatskyai" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://bsky.app/profile/greatskyai.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+          </nav>
+          <nav class="footer-col" aria-label="Resources">
+            <h4>Resources</h4>
+            <a href="/news">Blog</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Great Sky AI, Inc.</span>
+          <span>Boulder, Colorado</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>
