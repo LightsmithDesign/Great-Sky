@@ -123,4 +123,35 @@
       document.getElementById("form-success").classList.add("visible");
     });
   }
+
+  /* ---- Hardware showcase: tab switching ----------------------------------- */
+  var tabs = document.querySelectorAll(".showcase-tab");
+  var layouts = document.querySelectorAll(".hw-layout-wrapper");
+  if (tabs.length) {
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (t) {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
+        layouts.forEach(function (l) {
+          l.classList.remove("active");
+        });
+        
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+        var targetId = tab.getAttribute("data-target");
+        var targetLayout = document.getElementById(targetId);
+        if (targetLayout) {
+          targetLayout.classList.add("active");
+          
+          // Re-trigger scroll reveal for any revealed elements in the newly active layout
+          var nestedReveals = targetLayout.querySelectorAll(".reveal");
+          nestedReveals.forEach(function (el) {
+            el.classList.add("revealed");
+          });
+        }
+      });
+    });
+  }
 })();

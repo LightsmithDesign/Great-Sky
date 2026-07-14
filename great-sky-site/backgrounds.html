@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Assets & Backgrounds - Great Sky AI</title>
+  <meta name="description" content="Manage and upload brand asset images and custom background textures. Powered by secure Firestore.">
+  <meta name="theme-color" content="#FAF8F5">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  
+  <style>
+    /* Custom page layout styling that matches the Editorial Luxury design system */
+    .mgr-card {
+      background: var(--cream-1);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: clamp(1.5rem, 3vw, 3rem);
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    
+    .mgr-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 2rem;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    
+    .dropzone {
+      border: 2px dashed var(--sage);
+      border-radius: 6px;
+      padding: clamp(2rem, 5vw, 4rem);
+      text-align: center;
+      background: var(--cream-0);
+      cursor: pointer;
+      transition: all var(--ease) 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--olive);
+      background: var(--cream-2);
+    }
+    
+    .dropzone-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--olive);
+      opacity: 0.7;
+    }
+    
+    .dropzone-text {
+      font-family: var(--sans);
+      font-size: 1rem;
+      color: var(--text-soft);
+    }
+    
+    .dropzone-text strong {
+      color: var(--ink);
+    }
+    
+    .dropzone-subtext {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--stone);
+    }
+    
+    .file-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .preview-container {
+      display: none;
+      margin-top: 2rem;
+      border-top: 1px solid var(--hairline);
+      padding-top: 2rem;
+      animation: fadeIn 0.4s var(--ease);
+    }
+    
+    .preview-grid {
+      display: grid;
+      grid-template-columns: clamp(120px, 20vw, 220px) 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .preview-thumbnail {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--hairline);
+      background: var(--cream-0);
+    }
+    
+    .preview-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .preview-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--ink);
+      word-break: break-all;
+    }
+    
+    .preview-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--stone);
+    }
+    
+    .upload-btn-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    /* Gallery Grid */
+    .gallery-section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      margin-bottom: 2rem;
+      color: var(--ink);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 0.75rem;
+    }
+    
+    .backgrounds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    
+    .bg-card {
+      background: var(--cream-1);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform var(--ease) 0.3s, box-shadow var(--ease) 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .bg-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .bg-card.active {
+      border: 2px solid var(--olive);
+      box-shadow: 0 0 0 2px var(--cream-0), 0 8px 24px rgba(65, 69, 52, 0.15);
+    }
+    
+    .bg-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--cream-2);
+      overflow: hidden;
+    }
+    
+    .bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--ease) 0.5s;
+    }
+    
+    .bg-card:hover .bg-img {
+      transform: scale(1.03);
+    }
+    
+    .bg-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    
+    .bg-badge-system {
+      background: var(--cream-0);
+      color: var(--olive);
+      border: 1px solid var(--sage);
+    }
+    
+    .bg-badge-custom {
+      background: var(--olive);
+      color: var(--cream-0);
+    }
+    
+    .bg-badge-active {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: #16a34a;
+      color: white;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+    }
+    
+    .bg-info {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+    
+    .bg-name {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .bg-meta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--stone);
+    }
+    
+    .bg-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--hairline);
+    }
+    
+    .action-btn {
+      flex-grow: 1;
+      padding: 0.5rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid var(--hairline);
+      background: var(--cream-0);
+      color: var(--ink);
+      transition: all var(--ease) 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .action-btn:hover {
+      background: var(--cream-2);
+      border-color: var(--stone);
+    }
+    
+    .action-btn-primary {
+      background: var(--olive);
+      color: var(--cream-0);
+      border-color: var(--olive);
+    }
+    
+    .action-btn-primary:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    
+    .action-btn-danger {
+      color: #dc2626;
+      border-color: rgba(220, 38, 38, 0.2);
+    }
+    
+    .action-btn-danger:hover {
+      background: #fef2f2;
+      border-color: #dc2626;
+    }
+    
+    .action-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Toast alerts */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .toast {
+      background: var(--ink);
+      color: var(--cream-0);
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.15);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all var(--ease) 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .toast.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .toast-success {
+      border-left: 4px solid #16a34a;
+    }
+    
+    .toast-error {
+      border-left: 4px solid #dc2626;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link" aria-label="Great Sky AI — home">
+        <img src="/assets/great-sky-logo.svg" alt="Great Sky" class="logo logo-dark">
+        <img src="/assets/great-sky-logo-cream.svg" alt="" class="logo logo-cream" aria-hidden="true">
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="/tech">Tech</a>
+        <a href="/about">About</a>
+        <a href="/careers">Careers</a>
+        <a href="/news">News</a>
+        <a href="/backgrounds" class="active">Assets</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/contact" class="btn btn-pill btn-small">
+          <span>Contact</span>
+          <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-menu">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+    <nav class="overlay-nav" aria-label="Menu">
+      <a href="/"><em>01</em>Home</a>
+      <a href="/tech"><em>02</em>Tech</a>
+      <a href="/about"><em>03</em>About</a>
+      <a href="/careers"><em>04</em>Careers</a>
+      <a href="/news"><em>05</em>News</a>
+      <a href="/contact"><em>06</em>Contact</a>
+      <a href="/backgrounds"><em>07</em>Assets</a>
+    </nav>
+    <div class="overlay-foot">
+      <span>Great Sky AI, Inc.</span>
+      <span>Boulder, Colorado</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="page-hero">
+      <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.35;" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Asset Management</p>
+        <h1 class="page-title" style="max-width: 15ch;">Brand <em>textures</em></h1>
+        <p class="page-lede" style="max-width: 600px;">Connect to our Firestore database to upload custom site textures, manage assets, and customize the background of our editorial headers dynamically.</p>
+      </div>
+    </section>
+
+    <!-- ============ MANAGER CORE ============ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        
+        <!-- Firestore Connection State / Control Card -->
+        <div class="mgr-card">
+          <h2 class="mgr-title">Upload Brand Asset</h2>
+          <p class="hero-text-d" style="margin-bottom: 2rem; color: var(--text-soft);">
+            Select or drag in a custom background image. Images will be automatically optimized and compressed client-side to ensure quick loading speeds and absolute compliance with cloud storage parameters.
+          </p>
+          
+          <!-- Dropzone -->
+          <div class="dropzone" id="dropzone">
+            <svg class="dropzone-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <p class="dropzone-text"><strong>Drag and drop</strong> your image here, or <strong>click to browse</strong></p>
+            <p class="dropzone-subtext">Supports PNG, JPG, JPEG, SVG up to 10MB</p>
+            <input type="file" id="file-input" class="file-input" accept="image/*">
+          </div>
+          
+          <!-- Preview Section -->
+          <div class="preview-container" id="preview-container">
+            <h3 class="bg-name" style="margin-bottom: 1rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--stone);">Optimized Asset Preview</h3>
+            <div class="preview-grid">
+              <img src="" alt="Thumbnail preview" class="preview-thumbnail" id="preview-thumb">
+              <div class="preview-details">
+                <span class="preview-name" id="preview-filename">brand-texture-custom.jpg</span>
+                <span class="preview-meta" id="preview-filesize">0 KB</span>
+                <div class="upload-btn-row">
+                  <button class="action-btn action-btn-primary" id="upload-btn" style="padding-inline: 1.5rem;">
+                    <span>Upload to Firestore</span>
+                  </button>
+                  <button class="action-btn" id="cancel-btn">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Background Gallery -->
+        <h2 class="gallery-section-title">Aesthetic Library</h2>
+        
+        <!-- Grid -->
+        <div class="backgrounds-grid" id="backgrounds-grid">
+          <!-- Dynamically populated from JS -->
+          <div style="grid-column: 1/-1; text-align: center; padding-block: 4rem; color: var(--stone); font-family: var(--mono); font-size: 0.85rem;" id="gallery-loading">
+            Loading background library...
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer section-dark" id="footer" style="position: relative; overflow: hidden;">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="/assets/great-sky-logo-cream.svg" alt="Great Sky" class="footer-logo">
+          </div>
+          <nav class="footer-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="/tech">Tech</a>
+            <a href="/about">About Us</a>
+            <a href="/careers">Careers</a>
+            <a href="/news">News</a>
+          </nav>
+          <nav class="footer-col" aria-label="Connect">
+            <h4>Connect</h4>
+            <a href="https://www.linkedin.com/company/great-sky-ai" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/greatskyai" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://bsky.app/profile/greatskyai.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+          </nav>
+          <nav class="footer-col" aria-label="Resources">
+            <h4>Resources</h4>
+            <a href="/news">Blog</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Great Sky AI, Inc.</span>
+          <span>Boulder, Colorado</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Real-time Loader script to apply background to current page -->
+  <script type="module" src="/background-loader.js"></script>
+
+  <!-- Gallery Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, orderBy, query, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Global App references
+    let db;
+    let compressedDataUrl = "";
+    let activeBgId = "";
+    let activeBgUrl = "";
+
+    // DOM Elements
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("file-input");
+    const previewContainer = document.getElementById("preview-container");
+    const previewThumb = document.getElementById("preview-thumb");
+    const previewFilename = document.getElementById("preview-filename");
+    const previewFilesize = document.getElementById("preview-filesize");
+    const uploadBtn = document.getElementById("upload-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    const backgroundsGrid = document.getElementById("backgrounds-grid");
+
+    // Standard pre-defined/system backgrounds
+    const SYSTEM_BACKGROUNDS = [
+      { id: "sys-text-42", name: "Classic Slate Texture (Default)", url: "/assets/backgrounds/texture-42.jpg", system: true },
+      { id: "sys-text-45", name: "Sage Organic Overlay", url: "/assets/backgrounds/texture-45.jpg", system: true },
+      { id: "sys-text-38", name: "Deep Grain Shroud", url: "/assets/backgrounds/texture-38.jpg", system: true },
+      { id: "sys-text-37", name: "Ethereal Fiber Web", url: "/assets/backgrounds/texture-37.jpg", system: true },
+      { id: "sys-text-20", name: "Atmospheric Crease", url: "/assets/backgrounds/texture-20.jpg", system: true },
+      { id: "sys-group-20", name: "Boulder Peak Silhouette", url: "/assets/Group 20.png", system: true },
+      { id: "sys-group-24", name: "Synaptic Web Overlay", url: "/assets/Group 24.png", system: true },
+      { id: "sys-group-26", name: "NIST Lithography Blueprint", url: "/assets/Group 26.png", system: true },
+      { id: "sys-group-27", name: "US Foundries Die Scan", url: "/assets/Group 27.png", system: true },
+      { id: "sys-group-33", name: "SOEN Synaptic Junctions", url: "/assets/Group 33.png", system: true },
+      { id: "sys-group-35", name: "Lightwave Superconductors", url: "/assets/Group 35.png", system: true },
+      { id: "sys-rect-130", name: "Great Sky Cognitive Core", url: "/assets/Rectangle 130.png", system: true }
+    ];
+
+    // Notification system
+    function showToast(message, type = "success") {
+      const container = document.getElementById("toast-container");
+      const toast = document.createElement("div");
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `
+        <span style="font-weight: 500;">${message}</span>
+      `;
+      container.appendChild(toast);
+      
+      // Force trigger class addition for transition
+      setTimeout(() => toast.classList.add("visible"), 10);
+      
+      // Auto close
+      setTimeout(() => {
+        toast.classList.remove("visible");
+        setTimeout(() => toast.remove(), 400);
+      }, 4000);
+    }
+
+    // Initialize Firebase
+    async function initFirebase() {
+      try {
+        const response = await fetch("/api/firebase-config");
+        if (!response.ok) {
+          throw new Error("API config endpoint returned non-ok status");
+        }
+        const config = await response.json();
+        const app = initializeApp(config);
+        db = getFirestore(app);
+        
+        await loadLibrary();
+      } catch (err) {
+        console.error("Firebase setup failed:", err);
+        showToast("Database connection offline. Showing local system defaults.", "error");
+        // Fallback: load only system defaults
+        renderLibrary([]);
+      }
+    }
+
+    // Load library of system & custom backgrounds
+    async function loadLibrary() {
+      try {
+        const bgQuery = query(collection(db, "backgrounds"));
+        const snapshot = await getDocs(bgQuery);
+        
+        const customBackgrounds = [];
+        activeBgId = "";
+        activeBgUrl = "";
+
+        snapshot.forEach((docSnapshot) => {
+          const data = docSnapshot.data();
+          const item = {
+            id: docSnapshot.id,
+            name: data.name || "Custom Texture",
+            url: data.url,
+            createdAt: data.createdAt,
+            active: !!data.active,
+            system: false
+          };
+          customBackgrounds.push(item);
+          if (item.active) {
+            activeBgId = item.id;
+            activeBgUrl = item.url;
+          }
+        });
+
+        // Sort custom backgrounds by newest first
+        customBackgrounds.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        // If no custom background is flagged active in Firestore, check system default state
+        if (!activeBgId) {
+          // Check localStorage for active system background as fallback, or use Classic Slate
+          const localActiveId = localStorage.getItem("great-sky-system-bg-id") || "sys-text-42";
+          activeBgId = localActiveId;
+          const foundSys = SYSTEM_BACKGROUNDS.find(b => b.id === localActiveId);
+          if (foundSys) {
+            activeBgUrl = foundSys.url;
+          }
+        }
+
+        renderLibrary(customBackgrounds);
+      } catch (err) {
+        console.error("Error loading backgrounds from Firestore:", err);
+        showToast("Error retrieving backgrounds from Firestore.", "error");
+        renderLibrary([]);
+      }
+    }
+
+    // Render list
+    function renderLibrary(customBgs) {
+      backgroundsGrid.innerHTML = "";
+
+      // Combine both lists
+      const combined = [...customBgs, ...SYSTEM_BACKGROUNDS];
+
+      combined.forEach((bg) => {
+        const card = document.createElement("div");
+        const isActive = (bg.id === activeBgId) || (bg.system && bg.id === activeBgId);
+        card.className = `bg-card ${isActive ? 'active' : ''}`;
+        
+        let metaText = bg.system ? "Pre-configured System Asset" : `Uploaded ${formatDate(bg.createdAt)}`;
+        
+        card.innerHTML = `
+          <div class="bg-img-wrapper">
+            <img src="${bg.url}" alt="${bg.name}" class="bg-img" loading="lazy">
+            <span class="bg-badge ${bg.system ? 'bg-badge-system' : 'bg-badge-custom'}">
+              ${bg.system ? 'SYSTEM' : 'CUSTOM'}
+            </span>
+            ${isActive ? '<span class="bg-badge-active">ACTIVE</span>' : ''}
+          </div>
+          <div class="bg-info">
+            <h3 class="bg-name" title="${bg.name}">${bg.name}</h3>
+            <span class="bg-meta">${metaText}</span>
+            <div class="bg-actions">
+              ${isActive 
+                ? `<button class="action-btn" disabled style="width: 100%;">Currently Applied</button>` 
+                : `<button class="action-btn action-btn-primary apply-bg-btn" data-id="${bg.id}" data-url="${bg.url}" data-system="${bg.system}">Apply</button>`
+              }
+              ${(!bg.system) 
+                ? `<button class="action-btn action-btn-danger delete-bg-btn" data-id="${bg.id}">Delete</button>`
+                : ''
+              }
+            </div>
+          </div>
+        `;
+        backgroundsGrid.appendChild(card);
+      });
+
+      // Wire up click event listeners
+      document.querySelectorAll(".apply-bg-btn").forEach((btn) => {
+        btn.addEventListener("click", handleApplyBackground);
+      });
+      document.querySelectorAll(".delete-bg-btn").forEach((btn) => {
+        btn.addEventListener("click", handleDeleteBackground);
+      });
+    }
+
+    // Format date string
+    function formatDate(isoString) {
+      if (!isoString) return "";
+      const date = new Date(isoString);
+      return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    }
+
+    // Apply active background
+    async function handleApplyBackground(e) {
+      const btn = e.currentTarget;
+      const targetId = btn.getAttribute("data-id");
+      const targetUrl = btn.getAttribute("data-url");
+      const isSystem = btn.getAttribute("data-system") === "true";
+
+      btn.disabled = true;
+      btn.innerText = "Applying...";
+
+      try {
+        if (!db) {
+          // If Firestore is offline, save system background selection locally to LocalStorage
+          if (isSystem) {
+            localStorage.setItem("great-sky-system-bg-id", targetId);
+            activeBgId = targetId;
+            activeBgUrl = targetUrl;
+            
+            // Force dynamic page background update
+            const textureLayers = document.querySelectorAll(".texture-layer.texture-drift, .page-hero .texture-layer");
+            textureLayers.forEach(layer => {
+              layer.style.backgroundImage = `url('${targetUrl}')`;
+            });
+
+            showToast("System background applied locally.");
+            renderLibrary([]);
+          } else {
+            showToast("Could not apply custom background without active database.", "error");
+          }
+          return;
+        }
+
+        // Firestore is ONLINE
+        // Step 1: Clear active flag on all documents in Firestore backgrounds collection
+        const bgQuery = query(collection(db, "backgrounds"));
+        const snapshot = await getDocs(bgQuery);
+        
+        const updatePromises = [];
+        snapshot.forEach((docSnapshot) => {
+          if (docSnapshot.data().active) {
+            updatePromises.push(updateDoc(doc(db, "backgrounds", docSnapshot.id), { active: false }));
+          }
+        });
+        await Promise.all(updatePromises);
+
+        // Step 2: Set the newly selected document to active: true (if custom) or update/create reference
+        if (!isSystem) {
+          await updateDoc(doc(db, "backgrounds", targetId), { active: true });
+          localStorage.removeItem("great-sky-system-bg-id"); // Clear system local override
+        } else {
+          // It is a system background. Save system choice in Firestore too so other clients sync!
+          // We can write a special document in backgrounds with id of the system bg, or store it.
+          // Let's create/update a dedicated document for active system background in a doc named 'sys_config' or similar,
+          // or just add it to backgrounds list so the loader can read it easily.
+          // Let's insert a special "active_system" document or set active: true on it.
+          // Better yet, we can create a record for this system image in Firestore so the global loader reads it!
+          const sysDocId = "active-system-override";
+          // Check if this doc already exists in Firestore backgrounds, else add/update it
+          // We can use the doc helper to write to a specific ID!
+          await updateDoc(doc(db, "backgrounds", sysDocId), {
+            name: SYSTEM_BACKGROUNDS.find(b => b.id === targetId)?.name || "System Background",
+            url: targetUrl,
+            active: true,
+            createdAt: new Date().toISOString()
+          }).catch(async (err) => {
+            // Document might not exist yet, let's create it with setDoc equivalent or addDoc
+            // Since we want specific ID, we can do standard setDoc or check. Let's just create a new one:
+            await addDoc(collection(db, "backgrounds"), {
+              name: SYSTEM_BACKGROUNDS.find(b => b.id === targetId)?.name || "System Background",
+              url: targetUrl,
+              active: true,
+              createdAt: new Date().toISOString()
+            });
+          });
+        }
+
+        activeBgId = targetId;
+        activeBgUrl = targetUrl;
+        
+        // Dynamically update background on this page in real-time
+        const textureLayers = document.querySelectorAll(".texture-layer.texture-drift, .page-hero .texture-layer");
+        textureLayers.forEach(layer => {
+          layer.style.backgroundImage = `url('${targetUrl}')`;
+          layer.style.backgroundSize = "cover";
+          layer.style.backgroundPosition = "center";
+          layer.style.opacity = "0.45";
+        });
+
+        showToast("Brand background texture applied successfully.");
+        await loadLibrary();
+      } catch (err) {
+        console.error("Failed to apply background:", err);
+        showToast("Failed to apply background choice.", "error");
+        btn.disabled = false;
+        btn.innerText = "Apply";
+      }
+    }
+
+    // Delete custom background
+    async function handleDeleteBackground(e) {
+      const btn = e.currentTarget;
+      const targetId = btn.getAttribute("data-id");
+
+      if (!confirm("Are you sure you want to delete this custom brand background?")) return;
+
+      btn.disabled = true;
+      btn.innerText = "Deleting...";
+
+      try {
+        if (!db) {
+          showToast("Database connection offline.", "error");
+          btn.disabled = false;
+          btn.innerText = "Delete";
+          return;
+        }
+
+        await deleteDoc(doc(db, "backgrounds", targetId));
+        showToast("Brand background deleted.");
+        await loadLibrary();
+      } catch (err) {
+        console.error("Failed to delete background:", err);
+        showToast("Failed to delete background from Firestore.", "error");
+        btn.disabled = false;
+        btn.innerText = "Delete";
+      }
+    }
+
+    // Drag and Drop listeners
+    ["dragenter", "dragover"].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropzone.classList.add("dragover");
+      }, false);
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
+      }, false);
+    });
+
+    dropzone.addEventListener("drop", (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files.length) {
+        handleFileSelect(files[0]);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (fileInput.files.length) {
+        handleFileSelect(fileInput.files[0]);
+      }
+    });
+
+    // Handle selected image file
+    function handleFileSelect(file) {
+      if (!file.type.startsWith("image/")) {
+        showToast("Please select a valid image file.", "error");
+        return;
+      }
+
+      // Show loader feedback
+      previewContainer.style.display = "block";
+      uploadBtn.disabled = true;
+      uploadBtn.querySelector("span").innerText = "Optimizing asset...";
+      previewFilename.innerText = file.name;
+      previewFilesize.innerText = `${(file.size / 1024).toFixed(1)} KB (Original)`;
+
+      // Optimize image client side using Canvas (keeps it beautiful, ensures it's below Firestore's 1MB limit)
+      compressImage(file, 960, 960, 0.78).then((dataUrl) => {
+        compressedDataUrl = dataUrl;
+        
+        // Calculate compressed size
+        const stringLength = dataUrl.length - 'data:image/jpeg;base64,'.length;
+        const sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812; // approximate size
+        const sizeInKb = sizeInBytes / 1024;
+        
+        previewThumb.src = dataUrl;
+        previewFilesize.innerText = `${sizeInKb.toFixed(1)} KB (Optimized & Ready)`;
+        uploadBtn.disabled = false;
+        uploadBtn.querySelector("span").innerText = "Upload to Firestore";
+      }).catch((err) => {
+        console.error("Failed to optimize image:", err);
+        showToast("Error processing image.", "error");
+        resetUpload();
+      });
+    }
+
+    // Compress using Canvas
+    function compressImage(file, maxWidth, maxHeight, quality) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+            
+            if (width > maxWidth || height > maxHeight) {
+              const ratio = Math.min(maxWidth / width, maxHeight / height);
+              width = width * ratio;
+              height = height * ratio;
+            }
+            
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const dataUrl = canvas.toDataURL("image/jpeg", quality);
+            resolve(dataUrl);
+          };
+          img.onerror = (err) => reject(err);
+        };
+        reader.onerror = (err) => reject(err);
+      });
+    }
+
+    // Click to upload to Firestore
+    uploadBtn.addEventListener("click", async () => {
+      if (!compressedDataUrl) return;
+      if (!db) {
+        showToast("Cannot upload. Firestore database connection is offline.", "error");
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadBtn.querySelector("span").innerText = "Storing in Firestore...";
+
+      try {
+        const docRef = await addDoc(collection(db, "backgrounds"), {
+          name: previewFilename.innerText,
+          url: compressedDataUrl,
+          createdAt: new Date().toISOString(),
+          active: false
+        });
+
+        showToast("Brand asset successfully stored in Firestore!");
+        resetUpload();
+        await loadLibrary();
+      } catch (err) {
+        console.error("Failed to store in Firestore:", err);
+        showToast("Firestore upload failed. Check network connection.", "error");
+        uploadBtn.disabled = false;
+        uploadBtn.querySelector("span").innerText = "Upload to Firestore";
+      }
+    });
+
+    cancelBtn.addEventListener("click", resetUpload);
+
+    function resetUpload() {
+      previewContainer.style.display = "none";
+      compressedDataUrl = "";
+      fileInput.value = "";
+    }
+
+    // Initialize Page
+    initFirebase();
+  </script>
+</body>
+</html>
