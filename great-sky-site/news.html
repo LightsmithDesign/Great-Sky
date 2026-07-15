@@ -30,7 +30,6 @@
         <a href="/about">About</a>
         <a href="/careers">Careers</a>
         <a href="/news" class="active">News</a>
-        <a href="/backgrounds">Assets</a>
       </nav>
       <div class="header-actions">
         <a href="/contact" class="btn btn-pill btn-small">
@@ -53,7 +52,6 @@
       <a href="/careers"><em>04</em>Careers</a>
       <a href="/news"><em>05</em>News</a>
       <a href="/contact"><em>06</em>Contact</a>
-      <a href="/backgrounds"><em>07</em>Assets</a>
     </nav>
     <div class="overlay-foot">
       <span>Great Sky AI, Inc.</span>
@@ -63,56 +61,49 @@
 
   <main>
 
-    <!-- ============ PAGE HERO ============ -->
-    <section class="page-hero">
-      <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.4;" aria-hidden="true"></div>
-      <div class="hero-sky" aria-hidden="true">
-        <svg class="sky-arcs" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" fill="none">
-          <g class="arc-group">
-            <circle cx="800" cy="1450" r="780"  stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
-            <circle cx="800" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
-            <circle cx="800" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
-          </g>
-        </svg>
-      </div>
+    <!-- ============ NEWSSTAND ============ -->
+    <section class="section section-intro newsstand">
+      <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.22;" aria-hidden="true"></div>
       <div class="container">
-        <p class="eyebrow reveal"><span class="eyebrow-dot"></span>News</p>
-        <h1 class="page-title reveal">News &amp; <em>research</em></h1>
-        <p class="page-lede reveal" data-delay="1">Research updates, announcements, technical writing, and the thinking behind Great Sky.</p>
-      </div>
-    </section>
+        <div class="newsstand-masthead">
+          <h1 class="newsstand-title reveal">News &amp; <em>research</em></h1>
+          <p class="newsstand-lede reveal" data-delay="1">Research updates, announcements, technical writing, and the thinking behind Great Sky.</p>
+        </div>
 
-    <!-- ============ FEATURED ============ -->
-    <section class="section section-intro" style="padding-top: clamp(3rem, 6vw, 5rem);">
-      <div class="container">
-        <article class="featured-card reveal">
-          <div class="featured-tags">
-            <span class="tag">Featured</span>
-            <span class="tag">Announcement</span>
+        <article class="featured-story reveal">
+          <div class="featured-visual" aria-hidden="true">
+            <div class="featured-visual-plate"></div>
           </div>
-          <h2 class="featured-title">Great Sky Unveils Brain-like Computing Architecture Built for the Next Era of AI</h2>
-          <p class="featured-body">After more than a decade of research at the National Institute of Standards and Technology, the team behind Great Sky AI is ready to tell its story publicly. Here's what we've been building — and why we believe it changes everything.</p>
-          <div class="featured-foot">
-            <a href="/news/great-sky-ai-emerges-from-nist" class="btn btn-pill btn-cream" >
-              <span>Read Full Article</span>
-              <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </a>
-            <span class="featured-date">March 2026 · 8 min read</span>
+          <div class="featured-content">
+            <div class="featured-kicker">
+              <span>FEATURED</span>
+              <span>ANNOUNCEMENT</span>
+            </div>
+            <h2 class="featured-title">Great Sky Unveils Brain-like Computing Architecture Built for the Next Era of AI</h2>
+            <p class="featured-body">After more than a decade of research at the National Institute of Standards and Technology, the team behind Great Sky AI is ready to tell its story publicly. Here's what we've been building — and why we believe it changes everything.</p>
+            <div class="featured-foot">
+              <a href="/news/great-sky-ai-emerges-from-nist" class="news-read news-read-large">
+                <span>Read Full Article</span>
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <span class="featured-date">March 2026 · 8 min read</span>
+            </div>
           </div>
         </article>
 
         <!-- ============ FILTERS ============ -->
         <div class="filter-bar reveal" role="group" aria-label="Filter articles">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="announcement">Announcement</button>
-          <button class="filter-btn" data-filter="blog">Blog</button>
-          <button class="filter-btn" data-filter="news">News</button>
+          <button class="filter-btn active" data-filter="all">ALL</button>
+          <button class="filter-btn" data-filter="announcement">ANNOUNCEMENT</button>
+          <button class="filter-btn" data-filter="blog">BLOG</button>
+          <button class="filter-btn" data-filter="news">NEWS</button>
         </div>
 
         <!-- ============ ARTICLE GRID ============ -->
         <div class="news-grid" id="news-grid">
-          <article class="news-card reveal" data-category="news" data-delay="1">
-            <span class="card-num">News</span>
+          <article class="news-card news-card-wide reveal" data-category="news" data-delay="1">
+            <div class="news-card-visual" style="background-image:url('/assets/backgrounds/texture-20.jpg');" aria-hidden="true"></div>
+            <span class="card-num">NEWS</span>
             <h3 class="card-title"><a href="/news/the-neuron-podcast">What's Next After GPUs?</a></h3>
             <p class="card-body">Jeff Shainline, co-founder and CEO of Great Sky, breaks down a radically different future for AI infrastructure on The Neuron - AI News Podcast</p>
             <div class="news-card-foot">
@@ -122,8 +113,8 @@
               </a>
             </div>
           </article>
-          <article class="news-card reveal" data-category="news" data-delay="1">
-            <span class="card-num">News</span>
+          <article class="news-card news-card-brief reveal" data-category="news" data-delay="1">
+            <span class="card-num">NEWS</span>
             <h3 class="card-title"><a href="/news/ieee-superconductors-and-light-will-transform-ai">Superconductors and Light Will Transform AI</a></h3>
             <p class="card-body">IEEE article featuring Great Sky. Conventional AI faces growing obstacles because its hardware and algorithms are poorly matched to the mechanisms of biological intelligence, driving high power consumption and making data-intensive tasks far more difficult than they are for humans. Superconducting optoelectronic networks (SOEN) combine superconducting computation with optical communication to implement neural systems more directly.</p>
             <div class="news-card-foot">
@@ -133,8 +124,8 @@
               </a>
             </div>
           </article>
-          <article class="news-card reveal" data-category="blog" data-delay="2">
-            <span class="card-num">Blog</span>
+          <article class="news-card news-card-brief reveal" data-category="blog" data-delay="2">
+            <span class="card-num">BLOG</span>
             <h3 class="card-title"><a href="/news/soens-in-space">SOENs in Space</a></h3>
             <p class="card-body">Launching compute into space is an idea that has recently gained attention. Looking closely at the implications, it is clear that superconducting optoelectronic networks (SOENs) bring tremendous advantages relative to conventional computational systems for large-scale AI in space.</p>
             <div class="news-card-foot">
@@ -145,7 +136,8 @@
             </div>
           </article>
           <article class="news-card reveal" data-category="announcement" data-delay="1">
-            <span class="card-num">Announcement</span>
+            <div class="news-card-visual" style="background-image:url('/assets/backgrounds/texture-45.jpg');" aria-hidden="true"></div>
+            <span class="card-num">ANNOUNCEMENT</span>
             <h3 class="card-title"><a href="/news/great-sky-ai-emerges-from-nist">Great Sky AI Emerges from NIST: A New Kind of AI Hardware Company</a></h3>
             <p class="card-body">Ten years in development, new superconducting, optically connected architecture overcomes the limits of GPUs and transformers—unlocking multimodal intelligence operating a million times faster than current approaches</p>
             <div class="news-card-foot">
@@ -156,7 +148,7 @@
             </div>
           </article>
           <article class="news-card reveal" data-category="blog" data-delay="1">
-            <span class="card-num">Blog</span>
+            <span class="card-num">BLOG</span>
             <h3 class="card-title"><a href="/news/building-a-deep-tech-company-what-we-learned-at-nist">The History of Great Sky</a></h3>
             <p class="card-body">How the National Institute of Standards and Technology (NIST) incubated the team that will transform AI computing</p>
             <div class="news-card-foot">
@@ -167,7 +159,7 @@
             </div>
           </article>
           <article class="news-card reveal" data-category="blog" data-delay="2">
-            <span class="card-num">Blog</span>
+            <span class="card-num">BLOG</span>
             <h3 class="card-title"><a href="/news/perspective-on-deepseek">Perspective on DeepSeek from Great Sky</a></h3>
             <p class="card-body">The DeepSeek moment sent shockwaves through the AI world. Jeff Shainline unpacks what it actually means — and why it makes the case for Great Sky stronger than ever.</p>
             <div class="news-card-foot">
@@ -236,6 +228,5 @@
   </main>
 
   <script src="/script.js"></script>
-  <script type="module" src="/background-loader.js"></script>
 </body>
 </html>
