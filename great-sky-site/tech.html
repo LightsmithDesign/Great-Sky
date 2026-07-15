@@ -27,6 +27,8 @@
       </a>
       <nav class="main-nav" aria-label="Primary">
         <a href="/tech" class="active">Tech</a>
+        <a href="/tech-v2">Tech V2</a>
+        <a href="/tech-v3">Tech V3</a>
         <a href="/about">About</a>
         <a href="/careers">Careers</a>
         <a href="/news">News</a>
@@ -47,7 +49,9 @@
   <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
     <nav class="overlay-nav" aria-label="Menu">
       <a href="/"><em>01</em>Home</a>
-      <a href="/tech"><em>02</em>Tech</a>
+      <a href="/tech"><em>02a</em>Tech (Main)</a>
+      <a href="/tech-v2"><em>02b</em>Tech V2 (Lab Blueprint)</a>
+      <a href="/tech-v3"><em>02c</em>Tech V3 (Waveguide Grid)</a>
       <a href="/about"><em>03</em>About</a>
       <a href="/careers"><em>04</em>Careers</a>
       <a href="/news"><em>05</em>News</a>
@@ -60,22 +64,378 @@
   </div>
 
   <main>
-
     <!-- ============ PAGE HERO ============ -->
-    <section class="page-hero">
+    <style id="tech-hero-styles">
+      /* Layering Safety Override: Animated vectors/waveguides placed strictly in the background */
+      .waveguide, .wall-divider, .growth-figure {
+        z-index: 1;
+        position: relative;
+        pointer-events: none;
+      }
+      .split, .section-head, .row-list, .table-wrap, .arch-grid, .quote-block, .tech-hero-grid {
+        position: relative;
+        z-index: 10;
+      }
+
+      .tech-hero {
+        position: relative;
+        padding-top: clamp(10rem, 18vh, 14rem);
+        padding-bottom: clamp(6rem, 10vw, 8rem);
+        background: linear-gradient(180deg, var(--cream-0) 0%, var(--cream-1) 100%);
+        overflow: hidden;
+      }
+      .tech-hero .texture-layer {
+        z-index: 0;
+      }
+      .tech-hero .hero-sky {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .tech-hero .container {
+        position: relative;
+        z-index: 2;
+      }
+      .tech-hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+        gap: clamp(3rem, 6vw, 7rem);
+        align-items: center;
+      }
+      .tech-hero-left {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .tech-hero-right {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .tech-hero-card {
+        position: relative;
+        background: color-mix(in srgb, var(--cream-0) 65%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--hairline);
+        padding: 2.25rem 2rem;
+        border-radius: 4px;
+        transition: all 0.6s var(--ease);
+      }
+      .tech-hero-card::before,
+      .tech-hero-card::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border: 1px solid var(--olive);
+        opacity: 0.25;
+        transition: all 0.6s var(--ease);
+      }
+      /* Top-Left Corner Bracket */
+      .tech-hero-card::before {
+        top: 8px;
+        left: 8px;
+        border-right: none;
+        border-bottom: none;
+      }
+      /* Bottom-Right Corner Bracket */
+      .tech-hero-card::after {
+        bottom: 8px;
+        right: 8px;
+        border-left: none;
+        border-top: none;
+      }
+      .tech-hero-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--olive);
+        background: color-mix(in srgb, var(--cream-0) 80%, transparent);
+        box-shadow: 0 15px 30px rgba(65, 69, 52, 0.05);
+      }
+      .tech-hero-card:hover::before,
+      .tech-hero-card:hover::after {
+        opacity: 0.8;
+        border-color: var(--olive);
+      }
+      .tech-hero-val {
+        font-family: var(--mono);
+        font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+        line-height: 1;
+        font-weight: 500;
+        color: var(--olive);
+      }
+      .tech-hero-lbl {
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        color: var(--text-soft);
+        margin-top: 0.5rem;
+        line-height: 1.4;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 1024px) {
+        .tech-hero-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+      }
+
+      /* Specific Layout Visual Elements */
+      .tech-placeholder-wrapper {
+        border: 1px solid var(--hairline);
+        background: color-mix(in srgb, var(--cream-1) 85%, transparent);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 1.5rem;
+        position: relative;
+        transition: border-color 0.4s var(--ease);
+      }
+      .tech-placeholder-wrapper:hover {
+        border-color: var(--olive);
+      }
+      .tech-placeholder-meta {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        background: color-mix(in srgb, var(--cream-2) 50%, transparent);
+        border-bottom: 1px solid var(--hairline);
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+      }
+      .tech-placeholder-graphic {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        background: var(--cream-0);
+        position: relative;
+      }
+      .tech-placeholder-graphic.widescreen {
+        padding: 1rem;
+      }
+      .tech-placeholder-graphic.vertical {
+        padding: 1rem;
+      }
+      .placeholder-svg {
+        width: 100%;
+        height: auto;
+        max-height: 380px;
+        color: var(--text-soft);
+        stroke: currentColor;
+      }
+      .tech-placeholder-specs {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        background: color-mix(in srgb, var(--cream-2) 30%, transparent);
+        border-top: 1px solid var(--hairline);
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--olive);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      /* Principles Layout (Hero Offset Grid) */
+      .var2-grid-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+        gap: clamp(3rem, 6vw, 6rem);
+        align-items: flex-start;
+      }
+      .var2-media {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .var2-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .stack-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+      }
+
+      /* Responsive rules for Principles Layout */
+      @media (max-width: 1024px) {
+        .var2-grid-layout {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .var2-content {
+          order: 1;
+        }
+        .var2-media {
+          order: 2;
+        }
+        .stack-columns {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+      }
+
+      /* ==========================================================================
+         SUPERCONDUCTING OPTOELECTRONIC NETWORKS (SOEN) PRINCIPLES (V3 LAYOUT)
+         ========================================================================== */
+      .cryo-stagger-list {
+        margin-top: clamp(3rem, 5vw, 4.5rem);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .cryo-stagger-card {
+        background: rgba(250, 248, 245, 0.45);
+        border: 1px solid var(--hairline);
+        padding: 2.5rem 2rem;
+        border-radius: 4px;
+        position: relative;
+        transition: all 0.6s var(--ease);
+      }
+
+      .cryo-stagger-card:hover {
+        background: rgba(250, 248, 245, 0.85);
+        border-color: var(--olive);
+        transform: translateY(-4px);
+      }
+
+      .cryo-stagger-num {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        color: var(--olive);
+        border-bottom: 1px solid var(--blueprint-tick);
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+        display: block;
+      }
+
+      .cryo-stagger-title {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+        font-weight: 400;
+        margin-bottom: 1rem;
+      }
+
+      .cryo-stagger-body {
+        color: var(--text-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 1024px) {
+        .cryo-stagger-list {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      /* Scalability Placeholder Style */
+      .scalability-placeholder {
+        background: #3e3e3c;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border-radius: 4px;
+        margin-top: clamp(2rem, 4vw, 3.5rem);
+        transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+        position: relative;
+        overflow: hidden;
+      }
+      .scalability-placeholder:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      }
+
+      /* Numbers Layout - Grid Variation 7 Cards styled as a 3-Column horizontal grid */
+      .numbers-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        text-align: left;
+        margin-top: clamp(2rem, 4vw, 3.5rem);
+      }
+      @media (max-width: 900px) {
+        .numbers-stat-grid {
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+        }
+      }
+      .split-stat-card {
+        border: 1px solid var(--hairline);
+        padding: clamp(2rem, 3.5vw, 3rem);
+        background: var(--cream-0);
+        border-radius: 4px;
+        transition: all 0.4s var(--ease);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      .split-stat-card:hover {
+        border-color: var(--olive);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(62, 62, 60, 0.04);
+      }
+      .stat-card-multiplier {
+        font-family: var(--serif);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1;
+        color: var(--olive);
+        display: block;
+        margin-bottom: 1.25rem;
+      }
+      .split-stat-card h4 {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-weight: 400;
+        margin-bottom: 0.75rem;
+        color: var(--ink);
+      }
+      .split-stat-card p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        color: var(--text-soft);
+      }
+    </style>
+
+    <section class="tech-hero">
       <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.4;" aria-hidden="true"></div>
       <div class="hero-sky" aria-hidden="true">
         <svg class="sky-arcs" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" fill="none">
           <g class="arc-group">
-            <circle cx="800" cy="1450" r="780"  stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
-            <circle cx="800" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
-            <circle cx="800" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
+            <circle cx="200" cy="1450" r="780" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
+            <circle cx="200" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
+            <circle cx="200" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
           </g>
         </svg>
       </div>
       <div class="container">
-        <h1 class="page-title reveal">Intelligence requires its own <em>hardware</em></h1>
-        <p class="page-lede reveal" data-delay="1">Superconductors and light operate at the physical limits of AI. The result is 300x reduction in cost of LLM tokens and a million x lower cost for video analysis.</p>
+        <div class="tech-hero-grid">
+          <div class="tech-hero-left">
+            <h1 class="page-title reveal">Intelligence requires its own <em>hardware</em></h1>
+            <p class="page-lede reveal" data-delay="1">Superconductors and light operate at the physical limits of AI. The result is 300x reduction in cost of LLM tokens and a million x lower cost for video analysis.</p>
+          </div>
+          <div class="tech-hero-right reveal" data-delay="1">
+            <div class="tech-hero-card">
+              <div class="tech-hero-val">300x</div>
+              <div class="tech-hero-lbl">reduction in cost of LLM tokens</div>
+            </div>
+            <div class="tech-hero-card">
+              <div class="tech-hero-val">1Mx</div>
+              <div class="tech-hero-lbl">lower cost for video analysis</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -99,13 +459,83 @@
       <div class="container">
         <div class="section-head reveal">
         </div>
-        <div class="split split-reverse">
-          <div class="split-body">
-            <p class="lede reveal" data-delay="1">Representing information as continuously varying analog signals instead of binary digits is a better substrate for the fluid operations of intelligence.</p>
-            <p class="body-text reveal" data-delay="2">Superconducting circuits based on Josephson junctions naturally support high-accuracy, low-noise analog computations. These circuits also seamlessly integrate processing and memory, storing synaptic weights right where they're needed, eliminating the primary requirement for data movement in AI. For communication across large neural networks, light is ideal, and integrating photonics with superconductors is straightforward and performant.</p>
-            <p class="body-text reveal" data-delay="3">Our hardware combines analog superconducting circuits with distributed, dynamic memory and integrated-photonic communication. The result is a platform with extraordinary speed and energy efficiency, low cost of manufacturing, and a new pathway to exponential scaling.</p>
+
+        <!-- Principles Content (Variation 2: Hero Offset Grid) -->
+        <div class="var2-grid-layout">
+          <!-- Left Column: Photo Placeholder -->
+          <div class="var2-media">
+            <!-- PHOTO PLACEHOLDER: Widescreen photo of wafer grid assembly -->
+            <div class="tech-placeholder-wrapper reveal" data-delay="1">
+              <div class="tech-placeholder-meta">
+                <span>ASSET REFERENCE: DSC_1092_FOUNDRY_WAFER.RAW</span>
+                <span>150MP WIDESCREEN DETAIL RECORD</span>
+              </div>
+              <div class="tech-placeholder-graphic widescreen">
+                <svg viewBox="0 0 1000 380" fill="none" class="placeholder-svg" style="background: var(--ink); border-radius: 2px;">
+                  <!-- Rule of Thirds Grid Lines (Photographic) -->
+                  <line x1="333.3" y1="0" x2="333.3" y2="380" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
+                  <line x1="666.6" y1="0" x2="666.6" y2="380" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
+                  <line x1="0" y1="126.6" x2="1000" y2="126.6" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
+                  <line x1="0" y1="253.3" x2="1000" y2="253.3" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
+                  
+                  <!-- Viewfinder Focus Frame Overlays -->
+                  <path d="M 40 50 H 20 V 30" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
+                  <path d="M 960 50 H 980 V 30" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
+                  <path d="M 40 330 H 20 V 350" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
+                  <path d="M 960 330 H 980 V 350" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
+
+                  <!-- Multi-point AF Array simulation -->
+                  <g opacity="0.25" stroke="var(--cream-0)" stroke-width="0.75">
+                    <rect x="475" y="165" width="50" height="50" rx="2" fill="none" />
+                    <line x1="450" y1="190" x2="475" y2="190" />
+                    <line x1="525" y1="190" x2="550" y2="190" />
+                    <line x1="500" y1="140" x2="500" y2="165" />
+                    <line x1="500" y1="215" x2="500" y2="240" />
+                    
+                    <!-- Peripheral AF indicators -->
+                    <circle cx="333.3" cy="190" r="3" fill="none" />
+                    <circle cx="666.6" cy="190" r="3" fill="none" />
+                    <circle cx="500" cy="126.6" r="3" fill="none" />
+                    <circle cx="500" cy="253.3" r="3" fill="none" />
+                  </g>
+                  
+                  <!-- Photographic Icon in the center -->
+                  <g opacity="0.15" transform="translate(485, 175)">
+                    <rect width="30" height="22" rx="2" stroke="var(--cream-0)" stroke-width="1.5" fill="none" />
+                    <circle cx="9" cy="8" r="2" fill="var(--cream-0)" />
+                    <path d="M 3 19 L 12 10 L 19 17 L 22 14 L 27 19 Z" fill="var(--cream-0)" />
+                  </g>
+
+                  <!-- Viewfinder Metadata -->
+                  <text x="35" y="48" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" opacity="0.4">80mm prime lens</text>
+                  <text x="35" y="62" font-family="var(--mono)" font-size="9" fill="var(--olive)" opacity="0.6">COMPOSITION: LANDSCAPE WIDE</text>
+                  
+                  <text x="965" y="48" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" text-anchor="end" opacity="0.4">1/60s  f/8.0</text>
+                  <text x="965" y="62" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" text-anchor="end" opacity="0.4">ISO 50</text>
+                  
+                  <text x="500" y="300" font-family="var(--mono)" font-size="10" fill="var(--cream-0)" text-anchor="middle" letter-spacing="3" opacity="0.5">PHOTO PLACEHOLDER</text>
+                  <text x="500" y="316" font-family="var(--mono)" font-size="8" fill="var(--olive)" text-anchor="middle" letter-spacing="1" opacity="0.7">REPLACE WITH HIGH-RESOLUTION WAFER PHOTO</text>
+                  
+                  <text x="965" y="340" font-family="var(--mono)" font-size="8" fill="var(--cream-0)" text-anchor="end" opacity="0.3">PHASE ONE XF IQ4</text>
+                </svg>
+              </div>
+              <div class="tech-placeholder-specs">
+                <span>EXPOSURE: 1/60s @ f/8.0</span>
+                <span>WAFER ASSEMBLY SHOT</span>
+                <span>DIMENSIONS: 14204 x 10652 px</span>
+              </div>
+            </div>
           </div>
-          <h2 class="display reveal">Principles of intelligence, realized in <em>hardware</em></h2>
+          
+          <!-- Right Column: Content -->
+          <div class="var2-content">
+            <h2 class="display reveal">Principles of intelligence, realized in <em>hardware</em></h2>
+            <p class="lede reveal" data-delay="1">Representing information as continuously varying analog signals instead of binary digits is a better substrate for the fluid operations of intelligence.</p>
+            <div class="stack-columns">
+              <p class="body-text reveal" data-delay="2">Superconducting circuits based on Josephson junctions naturally support high-accuracy, low-noise analog computations. These circuits also seamlessly integrate processing and memory, storing synaptic weights right where they're needed, eliminating the primary requirement for data movement in AI. For communication across large neural networks, light is ideal, and integrating photonics with superconductors is straightforward and performant.</p>
+              <p class="body-text reveal" data-delay="3">Our hardware combines analog superconducting circuits with distributed, dynamic memory and integrated-photonic communication. The result is a platform with extraordinary speed and energy efficiency, low cost of manufacturing, and a new pathway to exponential scaling.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -153,48 +583,31 @@
             <p class="lede reveal" data-delay="1">We build superconducting optoelectronic networks—SOENs. These are the foundational principles.</p>
           </div>
         </div>
-        <div class="row-list">
-          <div class="row-item reveal" data-delay="1">
-            <span class="row-num">01</span>
-            <h3 class="row-title">Architecture</h3>
-            <p class="row-body">The most important principle of hardware for AI is that the architecture of neural networks must be physically instantiated in hardware. It isn't enough to digitally emulate what neurons and synapses do. Chips must be based on circuits that actually perform the operations of neurons, synapses, and their extensive interconnectivity.</p>
+
+        <div class="cryo-stagger-list">
+          <div class="cryo-stagger-card reveal" data-delay="1">
+            <span class="cryo-stagger-num">01 // LAYER_TOPOLOGY</span>
+            <h3 class="cryo-stagger-title">Architecture</h3>
+            <p class="cryo-stagger-body">The most important principle of hardware for AI is that the architecture of neural networks must be physically instantiated in hardware. It isn't enough to digitally emulate what neurons and synapses do. Chips must be based on circuits that actually perform the operations of neurons, synapses, and their extensive interconnectivity.</p>
           </div>
-          <div class="row-item reveal" data-delay="2">
-            <span class="row-num">02</span>
-            <h3 class="row-title">Computation</h3>
-            <p class="row-body">Superconducting circuits are ideal for the purpose of functioning like neurons and synapses. The most prominent superconducting device is the Josephson junction, and simple circuits with two Josephson junctions naturally capture the behavior of these critical elements: they sum many inputs, they perform nonlinear transfer functions, and they implement synaptic weights. Josephson junctions have the highest speed-over-energy quotient of any circuit element, so there is no known way to compute faster with less energy.</p>
+
+          <div class="cryo-stagger-card reveal" data-delay="2">
+            <span class="cryo-stagger-num">02 // COUPLING_PHASE</span>
+            <h3 class="cryo-stagger-title">Computation</h3>
+            <p class="cryo-stagger-body">Superconducting circuits are ideal for the purpose of functioning like neurons and synapses. The most prominent superconducting device is the Josephson junction, and simple circuits with two Josephson junctions naturally capture the behavior of these critical elements: they sum many inputs, they perform nonlinear transfer functions, and they implement synaptic weights. Josephson junctions have the highest speed-over-energy quotient of any circuit element, so there is no known way to compute faster with less energy.</p>
           </div>
-          <div class="row-item reveal" data-delay="3">
-            <span class="row-num">03</span>
-            <h3 class="row-title">Memory</h3>
-            <p class="row-body">For neural networks, the most important role of memory is to store synaptic weights. With superconducting circuits, it is straightforward to store synaptic weights right at the circuit that uses that information, eliminating the primary data-movement requirement in conventional computer architectures. Josephson circuits solve this problem inherently.</p>
+
+          <div class="cryo-stagger-card reveal" data-delay="3">
+            <span class="cryo-stagger-num">03 // STORE_FLUXON</span>
+            <h3 class="cryo-stagger-title">Memory</h3>
+            <p class="cryo-stagger-body">For neural networks, the most important role of memory is to store synaptic weights. With superconducting circuits, it is straightforward to store synaptic weights right at the circuit that uses that information, eliminating the primary data-movement requirement in conventional computer architectures. Josephson circuits solve this problem inherently.</p>
           </div>
-          <div class="row-item reveal" data-delay="4">
-            <span class="row-num">04</span>
-            <h3 class="row-title">Communication</h3>
-            <p class="row-body">Neural networks require extensive connectivity—far beyond what can be achieved with copper wires directly. Using light for communication allows each neuron to make thousands of direct connections. Each of our neurons has its own light source and its own network of waveguides—tiny wires for light. Each synapse has a superconducting single-photon detector—the most sensitive light sensor in the world. With this approach, neurons achieve two physical limits: they communicate at the fastest speed in the universe, the speed of light; and they do this with the minimum possible optical energy—one photon per communication event.</p>
+
+          <div class="cryo-stagger-card reveal" data-delay="4">
+            <span class="cryo-stagger-num">04 // LIGHT_WAVEGUIDE</span>
+            <h3 class="cryo-stagger-title">Communication</h3>
+            <p class="cryo-stagger-body">Neural networks require extensive connectivity—far beyond what can be achieved with copper wires directly. Using light for communication allows each neuron to make thousands of direct connections. Each of our neurons has its own light source and its own network of waveguides—tiny wires for light. Each synapse has a superconducting single-photon detector—the most sensitive light sensor in the world. With this approach, neurons achieve two physical limits: they communicate at the fastest speed in the universe, the speed of light; and they do this with the minimum possible optical energy—one photon per communication event.</p>
           </div>
-        </div>
-        <div class="wall-divider reveal" data-delay="2" aria-hidden="true">
-          <svg viewBox="0 0 1200 100" fill="none" preserveAspectRatio="xMidYMid meet">
-            <path class="branch-line branch-trunk" d="M40 50 C 220 50, 260 27, 400 27" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-trunk" d="M40 50 C 220 50, 260 73, 400 73" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 27 C 700 27, 900 8, 1160 8" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 27 C 700 27, 900 24, 1160 24" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 27 C 720 27, 920 42, 1160 42" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 73 C 700 73, 900 58, 1160 58" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 73 C 700 73, 900 76, 1160 76" stroke="currentColor" stroke-width="1"/>
-            <path class="branch-line branch-leaf" d="M400 73 C 720 73, 920 92, 1160 92" stroke="currentColor" stroke-width="1"/>
-            <circle class="branch-dot branch-dot-root" cx="40" cy="50" r="3" fill="currentColor"/>
-            <circle class="branch-dot" cx="400" cy="27" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="400" cy="73" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="8" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="24" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="42" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="58" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="76" r="2" fill="currentColor"/>
-            <circle class="branch-dot" cx="1160" cy="92" r="2" fill="currentColor"/>
-          </svg>
         </div>
       </div>
     </section>
@@ -202,31 +615,22 @@
     <!-- ============ 05 SCALABILITY ============ -->
     <section class="section section-wall">
       <div class="container">
-        <div class="section-head reveal">
-        </div>
         <div class="split">
-          <h2 class="display reveal">Scalability</h2>
+          <div class="split-left-col">
+            <h2 class="display reveal">Scalability</h2>
+            <div class="scalability-placeholder reveal" data-delay="1" id="scalability-placeholder"></div>
+          </div>
           <div class="split-body">
             <p class="lede reveal" data-delay="1">With these principles in place, we have a scalable architecture for profound intelligence.</p>
             <p class="body-text reveal" data-delay="2">The exponential scaling of Moore's law has transformed society and fueled the economy for six decades. In that case, scaling was sustained through improvements in lithography as transistors were made smaller with each product generation. SOENs provide a new path to exponential growth—not by shrinking devices to the atomic scale, but by integrating ever more neural circuitry into larger systems.</p>
             <p class="body-text reveal" data-delay="3">This is possible with Great Sky's hardware because of these principles: superconductors enable extreme speed with very low power density; they co-locate memory with processing to reduce data movement; and they communicate with single particles of light for extraordinary communication bandwidth while retaining energy efficiency. Our chips are manufactured on foundry nodes that were standard in 2005, keeping costs low, margins high, and making US production viable.</p>
           </div>
         </div>
-        <div class="growth-figure reveal" data-delay="2" aria-hidden="true">
-          <svg viewBox="0 0 1200 220" fill="none" preserveAspectRatio="xMidYMid meet">
-            <line x1="20" y1="204" x2="1180" y2="204" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-dasharray="1 6"/>
-            <path class="draw-line" d="M20 200 C 300 197, 520 190, 700 162 C 880 134, 1040 80, 1180 14" stroke="currentColor" stroke-width="1"/>
-            <circle class="draw-dot" cx="20" cy="200" r="3" fill="currentColor"/>
-            <circle class="draw-dot" cx="700" cy="162" r="2" fill="currentColor"/>
-            <circle class="draw-dot" cx="1040" cy="80" r="2" fill="currentColor"/>
-            <circle class="draw-dot" cx="1180" cy="14" r="2.5" fill="currentColor"/>
-          </svg>
-        </div>
       </div>
     </section>
 
     <!-- ============ 06 STATEMENT (DARK) ============ -->
-    <section class="section section-dark" style="overflow: hidden;">
+    <section class="section section-dark" id="fuel-economy-section" style="overflow: hidden; padding-top: clamp(8rem, 15vw, 16rem); padding-bottom: clamp(8rem, 15vw, 16rem);">
       <div class="texture-layer" style="background-image:url('/assets/backgrounds/texture-37.jpg'); opacity:0.12;" aria-hidden="true"></div>
       <div class="container">
         <div class="quote-block">
@@ -238,42 +642,31 @@
     <!-- ============ 07 THE NUMBERS ============ -->
     <section class="section section-intro">
       <div class="container">
-        <div class="section-head reveal">
-        </div>
-        <div class="split">
+        <div class="split" style="margin-bottom: clamp(2rem, 4vw, 3.5rem);">
           <h2 class="display reveal">Hardware and Architecture Transform the <em>Numbers</em></h2>
           <div class="split-body">
             <p class="lede reveal" data-delay="1">All figures derived from experimental data and published research.</p>
           </div>
         </div>
-        <div class="table-wrap reveal" data-delay="1">
-          <table class="compare">
-            <thead>
-              <tr>
-                <th scope="col">Metric</th>
-                <th scope="col">Today's Best AI Hardware</th>
-                <th scope="col">Our Architecture</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="metric">Video inference speed</td>
-                <td class="today">30 frames per second</td>
-                <td class="ours">60 million frames per second <em>(2 million x improvement)</em></td>
-              </tr>
-              <tr>
-                <td class="metric">Video inference energy (10 min video)</td>
-                <td class="today">870,000 joules</td>
-                <td class="ours">192 Joules <em>(4,500 x improvement)</em></td>
-              </tr>
-              <tr>
-                <td class="metric">LLM cost per token</td>
-                <td class="today">$3 per 1M output tokens</td>
-                <td class="ours">$0.01 per 1M output tokens <em>(300x lower TCO)</em></td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div class="numbers-stat-grid reveal" data-delay="2">
+          <div class="split-stat-card">
+            <span class="stat-card-multiplier">2,000,000x</span>
+            <h4>Speed Multiplier</h4>
+            <p>Our chips execute 60 million frames of real-time video inference every single second, compared to just 30 frames on standard hardware.</p>
+          </div>
+          <div class="split-stat-card">
+            <span class="stat-card-multiplier">4,500x</span>
+            <h4>Thermal Efficiency</h4>
+            <p>Inference on a ten minute high-res video takes only 192 Joules of energy, down from 870,000 Joules required by traditional servers.</p>
+          </div>
+          <div class="split-stat-card">
+            <span class="stat-card-multiplier">300x</span>
+            <h4>Operational Cost Reduction</h4>
+            <p>Operation cost is reduced from $3.00 to an unprecedented $0.01 per million tokens, unlocking massive enterprise scaling opportunities.</p>
+          </div>
         </div>
+
       </div>
     </section>
 
