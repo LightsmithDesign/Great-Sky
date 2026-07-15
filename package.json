@@ -1,0 +1,14 @@
+{
+  "name": "great-sky-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static Great Sky AI website served from the great-sky-site directory.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Static site: no build step required.')\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
