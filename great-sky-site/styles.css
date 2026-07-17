@@ -2952,6 +2952,7 @@ body.menu-open { overflow: hidden; }
   font-size: 1.02rem;
   line-height: 1.6;
   color: var(--text);
+  margin-bottom: 1.2rem;
 }
 
 /* ==================== LAYOUT 1: EDITORIAL MONOLITH ==================== */
