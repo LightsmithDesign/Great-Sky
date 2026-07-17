@@ -27,8 +27,6 @@
       </a>
       <nav class="main-nav" aria-label="Primary">
         <a href="/tech" class="active">Tech</a>
-        <a href="/tech-v2">Tech V2</a>
-        <a href="/tech-v3">Tech V3</a>
         <a href="/about">About</a>
         <a href="/careers">Careers</a>
         <a href="/news">News</a>
@@ -49,9 +47,7 @@
   <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
     <nav class="overlay-nav" aria-label="Menu">
       <a href="/"><em>01</em>Home</a>
-      <a href="/tech"><em>02a</em>Tech (Main)</a>
-      <a href="/tech-v2"><em>02b</em>Tech V2 (Lab Blueprint)</a>
-      <a href="/tech-v3"><em>02c</em>Tech V3 (Waveguide Grid)</a>
+      <a href="/tech"><em>02</em>Tech</a>
       <a href="/about"><em>03</em>About</a>
       <a href="/careers"><em>04</em>Careers</a>
       <a href="/news"><em>05</em>News</a>
@@ -120,7 +116,7 @@
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--hairline);
         padding: 2.25rem 2rem;
-        border-radius: 4px;
+        border-radius: 11px;
         transition: all 0.6s var(--ease);
       }
       .tech-hero-card::before,
@@ -297,9 +293,9 @@
 
       .cryo-stagger-card {
         background: rgba(250, 248, 245, 0.45);
-        border: 1px solid var(--hairline);
+        border-top: 2px solid var(--olive);
         padding: 2.5rem 2rem;
-        border-radius: 4px;
+        border-radius: 2px;
         position: relative;
         transition: all 0.6s var(--ease);
       }
@@ -375,7 +371,7 @@
         border: 1px solid var(--hairline);
         padding: clamp(2rem, 3.5vw, 3rem);
         background: var(--cream-0);
-        border-radius: 4px;
+        border-radius: 11px;
         transition: all 0.4s var(--ease);
         display: flex;
         flex-direction: column;
@@ -462,69 +458,9 @@
 
         <!-- Principles Content (Variation 2: Hero Offset Grid) -->
         <div class="var2-grid-layout">
-          <!-- Left Column: Photo Placeholder -->
-          <div class="var2-media">
-            <!-- PHOTO PLACEHOLDER: Widescreen photo of wafer grid assembly -->
-            <div class="tech-placeholder-wrapper reveal" data-delay="1">
-              <div class="tech-placeholder-meta">
-                <span>ASSET REFERENCE: DSC_1092_FOUNDRY_WAFER.RAW</span>
-                <span>150MP WIDESCREEN DETAIL RECORD</span>
-              </div>
-              <div class="tech-placeholder-graphic widescreen">
-                <svg viewBox="0 0 1000 380" fill="none" class="placeholder-svg" style="background: var(--ink); border-radius: 2px;">
-                  <!-- Rule of Thirds Grid Lines (Photographic) -->
-                  <line x1="333.3" y1="0" x2="333.3" y2="380" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
-                  <line x1="666.6" y1="0" x2="666.6" y2="380" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
-                  <line x1="0" y1="126.6" x2="1000" y2="126.6" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
-                  <line x1="0" y1="253.3" x2="1000" y2="253.3" stroke="var(--cream-0)" stroke-width="0.5" opacity="0.12" />
-                  
-                  <!-- Viewfinder Focus Frame Overlays -->
-                  <path d="M 40 50 H 20 V 30" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
-                  <path d="M 960 50 H 980 V 30" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
-                  <path d="M 40 330 H 20 V 350" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
-                  <path d="M 960 330 H 980 V 350" stroke="var(--cream-0)" stroke-width="1.2" opacity="0.3" />
-
-                  <!-- Multi-point AF Array simulation -->
-                  <g opacity="0.25" stroke="var(--cream-0)" stroke-width="0.75">
-                    <rect x="475" y="165" width="50" height="50" rx="2" fill="none" />
-                    <line x1="450" y1="190" x2="475" y2="190" />
-                    <line x1="525" y1="190" x2="550" y2="190" />
-                    <line x1="500" y1="140" x2="500" y2="165" />
-                    <line x1="500" y1="215" x2="500" y2="240" />
-                    
-                    <!-- Peripheral AF indicators -->
-                    <circle cx="333.3" cy="190" r="3" fill="none" />
-                    <circle cx="666.6" cy="190" r="3" fill="none" />
-                    <circle cx="500" cy="126.6" r="3" fill="none" />
-                    <circle cx="500" cy="253.3" r="3" fill="none" />
-                  </g>
-                  
-                  <!-- Photographic Icon in the center -->
-                  <g opacity="0.15" transform="translate(485, 175)">
-                    <rect width="30" height="22" rx="2" stroke="var(--cream-0)" stroke-width="1.5" fill="none" />
-                    <circle cx="9" cy="8" r="2" fill="var(--cream-0)" />
-                    <path d="M 3 19 L 12 10 L 19 17 L 22 14 L 27 19 Z" fill="var(--cream-0)" />
-                  </g>
-
-                  <!-- Viewfinder Metadata -->
-                  <text x="35" y="48" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" opacity="0.4">80mm prime lens</text>
-                  <text x="35" y="62" font-family="var(--mono)" font-size="9" fill="var(--olive)" opacity="0.6">COMPOSITION: LANDSCAPE WIDE</text>
-                  
-                  <text x="965" y="48" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" text-anchor="end" opacity="0.4">1/60s  f/8.0</text>
-                  <text x="965" y="62" font-family="var(--mono)" font-size="9" fill="var(--cream-0)" text-anchor="end" opacity="0.4">ISO 50</text>
-                  
-                  <text x="500" y="300" font-family="var(--mono)" font-size="10" fill="var(--cream-0)" text-anchor="middle" letter-spacing="3" opacity="0.5">PHOTO PLACEHOLDER</text>
-                  <text x="500" y="316" font-family="var(--mono)" font-size="8" fill="var(--olive)" text-anchor="middle" letter-spacing="1" opacity="0.7">REPLACE WITH HIGH-RESOLUTION WAFER PHOTO</text>
-                  
-                  <text x="965" y="340" font-family="var(--mono)" font-size="8" fill="var(--cream-0)" text-anchor="end" opacity="0.3">PHASE ONE XF IQ4</text>
-                </svg>
-              </div>
-              <div class="tech-placeholder-specs">
-                <span>EXPOSURE: 1/60s @ f/8.0</span>
-                <span>WAFER ASSEMBLY SHOT</span>
-                <span>DIMENSIONS: 14204 x 10652 px</span>
-              </div>
-            </div>
+          <!-- Left Column: Principles Image -->
+          <div class="var2-media reveal">
+            <img src="/assets/principles.avif" alt="Superconducting optoelectronic circuits" style="width: 100%; height: auto; display: block; border-radius: 11px;">
           </div>
           
           <!-- Right Column: Content -->
@@ -586,25 +522,25 @@
 
         <div class="cryo-stagger-list">
           <div class="cryo-stagger-card reveal" data-delay="1">
-            <span class="cryo-stagger-num">01 // LAYER_TOPOLOGY</span>
+            <span class="cryo-stagger-num">01</span>
             <h3 class="cryo-stagger-title">Architecture</h3>
             <p class="cryo-stagger-body">The most important principle of hardware for AI is that the architecture of neural networks must be physically instantiated in hardware. It isn't enough to digitally emulate what neurons and synapses do. Chips must be based on circuits that actually perform the operations of neurons, synapses, and their extensive interconnectivity.</p>
           </div>
 
           <div class="cryo-stagger-card reveal" data-delay="2">
-            <span class="cryo-stagger-num">02 // COUPLING_PHASE</span>
+            <span class="cryo-stagger-num">02</span>
             <h3 class="cryo-stagger-title">Computation</h3>
             <p class="cryo-stagger-body">Superconducting circuits are ideal for the purpose of functioning like neurons and synapses. The most prominent superconducting device is the Josephson junction, and simple circuits with two Josephson junctions naturally capture the behavior of these critical elements: they sum many inputs, they perform nonlinear transfer functions, and they implement synaptic weights. Josephson junctions have the highest speed-over-energy quotient of any circuit element, so there is no known way to compute faster with less energy.</p>
           </div>
 
           <div class="cryo-stagger-card reveal" data-delay="3">
-            <span class="cryo-stagger-num">03 // STORE_FLUXON</span>
+            <span class="cryo-stagger-num">03</span>
             <h3 class="cryo-stagger-title">Memory</h3>
             <p class="cryo-stagger-body">For neural networks, the most important role of memory is to store synaptic weights. With superconducting circuits, it is straightforward to store synaptic weights right at the circuit that uses that information, eliminating the primary data-movement requirement in conventional computer architectures. Josephson circuits solve this problem inherently.</p>
           </div>
 
           <div class="cryo-stagger-card reveal" data-delay="4">
-            <span class="cryo-stagger-num">04 // LIGHT_WAVEGUIDE</span>
+            <span class="cryo-stagger-num">04</span>
             <h3 class="cryo-stagger-title">Communication</h3>
             <p class="cryo-stagger-body">Neural networks require extensive connectivity—far beyond what can be achieved with copper wires directly. Using light for communication allows each neuron to make thousands of direct connections. Each of our neurons has its own light source and its own network of waveguides—tiny wires for light. Each synapse has a superconducting single-photon detector—the most sensitive light sensor in the world. With this approach, neurons achieve two physical limits: they communicate at the fastest speed in the universe, the speed of light; and they do this with the minimum possible optical energy—one photon per communication event.</p>
           </div>
@@ -618,7 +554,7 @@
         <div class="split">
           <div class="split-left-col">
             <h2 class="display reveal">Scalability</h2>
-            <div class="scalability-placeholder reveal" data-delay="1" id="scalability-placeholder"></div>
+            <img src="/assets/scalability.avif" alt="3D brain-scale visualization" class="reveal" data-delay="1" style="width: 100%; height: auto; display: block; border-radius: 2px;">
           </div>
           <div class="split-body">
             <p class="lede reveal" data-delay="1">With these principles in place, we have a scalable architecture for profound intelligence.</p>

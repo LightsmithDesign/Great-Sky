@@ -27,8 +27,6 @@
       </a>
       <nav class="main-nav" aria-label="Primary">
         <a href="/tech">Tech</a>
-        <a href="/tech-v2">Tech V2</a>
-        <a href="/tech-v3">Tech V3</a>
         <a href="/about">About</a>
         <a href="/careers">Careers</a>
         <a href="/news" class="active">News</a>
@@ -49,9 +47,7 @@
   <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
     <nav class="overlay-nav" aria-label="Menu">
       <a href="/"><em>01</em>Home</a>
-      <a href="/tech"><em>02a</em>Tech (Main)</a>
-      <a href="/tech-v2"><em>02b</em>Tech V2 (Lab Blueprint)</a>
-      <a href="/tech-v3"><em>02c</em>Tech V3 (Waveguide Grid)</a>
+      <a href="/tech"><em>02</em>Tech</a>
       <a href="/about"><em>03</em>About</a>
       <a href="/careers"><em>04</em>Careers</a>
       <a href="/news"><em>05</em>News</a>
@@ -74,103 +70,165 @@
           <p class="newsstand-lede reveal" data-delay="1">Research updates, announcements, technical writing, and the thinking behind Great Sky.</p>
         </div>
 
-        <article class="featured-story reveal">
-          <div class="featured-visual" aria-hidden="true">
-            <div class="featured-visual-plate"></div>
+      </div>
+    </section>
+
+    <style>
+      /* ===== NEWS SECTION - Bordered Card Deck ===== */
+      .news-variation { padding: clamp(4rem, 7vw, 6rem) 0; background: var(--cream-1); }
+      .nsv4-featured {
+        border: 9px solid var(--cream-0);
+        border-radius: 11px;
+        background: var(--cream-0);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        margin-bottom: 20px;
+      }
+      .nsv4-featured-visual-wrap { border-radius: 8px; overflow: hidden; min-height: 22rem; background: #fff; }
+      .nsv4-featured-visual { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .nsv4-featured-content { padding: clamp(2rem, 3vw, 3rem) clamp(1.5rem, 3vw, 3rem); display: flex; flex-direction: column; justify-content: center; gap: 1.1rem; }
+      .nsv4-featured-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; color: var(--ink); }
+      .nsv4-featured-title a { color: inherit; text-decoration: none; }
+      .nsv4-featured-title a:hover { color: var(--olive); }
+      .nsv4-featured-excerpt { color: var(--text-soft); font-size: 1rem; line-height: 1.6; max-width: 34em; }
+      .nsv4-featured-foot { display: flex; align-items: center; gap: 1.5rem; margin-top: 0.4rem; flex-wrap: wrap; }
+      @media (max-width: 900px) {
+        .nsv4-featured { grid-template-columns: 1fr; }
+        .nsv4-featured-visual-wrap { min-height: 16rem; }
+      }
+
+      .nsv4-filter-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2.5rem 0; }
+      .nsv4-filter-btn {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid var(--hairline);
+        border-radius: 999px;
+        padding: 0.65rem 1.4rem;
+        cursor: pointer;
+        transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease);
+      }
+      .nsv4-filter-btn:hover { border-color: var(--olive); }
+      .nsv4-filter-btn.active { background: var(--ink); color: var(--cream-0); border-color: var(--ink); }
+
+      .nsv4-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+      .nsv4-card { border: 9px solid var(--cream-0); border-radius: 11px; background: var(--cream-0); overflow: hidden; display: flex; flex-direction: column; }
+      .nsv4-card.nsv4-hidden { display: none; }
+      .nsv4-visual-wrap { aspect-ratio: 16/10; overflow: hidden; border-radius: 8px; background: #fff; }
+      .nsv4-visual { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .nsv4-content { padding: 1.25rem 0.15rem 0.15rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+      .nsv4-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--olive); }
+      .nsv4-title { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; line-height: 1.25; color: var(--ink); }
+      .nsv4-title a { color: inherit; text-decoration: none; }
+      .nsv4-excerpt { font-size: 0.85rem; color: var(--text-soft); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .nsv4-foot { margin-top: auto; padding-top: 0.6rem; display: flex; justify-content: space-between; align-items: center; }
+      .nsv4-date { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
+      .nsv4-read { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 500; color: var(--olive); }
+      .nsv4-read svg { width: 9px; height: 9px; }
+      @media (max-width: 1024px) { .nsv4-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 640px) { .nsv4-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <!-- ============ NEWS SECTION ============ -->
+    <section class="news-variation">
+      <div class="container">
+        <article class="nsv4-featured reveal">
+          <div class="nsv4-featured-visual-wrap">
+            <img class="nsv4-featured-visual" src="/assets/news/featured-brain-like-computing.jpg" alt="Great Sky Unveils Brain-like Computing Architecture Built for the Next Era of AI">
           </div>
-          <div class="featured-content">
-            <div class="featured-kicker">
-              <span>FEATURED</span>
-              <span>ANNOUNCEMENT</span>
-            </div>
-            <h2 class="featured-title">Great Sky Unveils Brain-like Computing Architecture Built for the Next Era of AI</h2>
-            <p class="featured-body">After more than a decade of research at the National Institute of Standards and Technology, the team behind Great Sky AI is ready to tell its story publicly. Here's what we've been building — and why we believe it changes everything.</p>
-            <div class="featured-foot">
-              <a href="/news/great-sky-ai-emerges-from-nist" class="news-read news-read-large">
-                <span>Read Full Article</span>
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <span class="featured-date">March 2026 · 8 min read</span>
+          <div class="nsv4-featured-content">
+            <span class="nsv4-tag">Announcement</span>
+            <h3 class="nsv4-featured-title"><a href="/news/great-sky-ai-emerges-from-nist">Great Sky Unveils Brain-like Computing Architecture Built for the Next Era of AI</a></h3>
+            <p class="nsv4-featured-excerpt">After more than a decade of research at the National Institute of Standards and Technology, the team behind Great Sky AI is ready to tell its story publicly. Here's what we've been building — and why we believe it changes everything.</p>
+            <div class="nsv4-featured-foot">
+              <a href="/news/great-sky-ai-emerges-from-nist" class="nsv4-read">Read Full Article <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <span class="nsv4-date">March 2026 · 8 min read</span>
             </div>
           </div>
         </article>
 
-        <!-- ============ FILTERS ============ -->
-        <div class="filter-bar reveal" role="group" aria-label="Filter articles">
-          <button class="filter-btn active" data-filter="all">ALL</button>
-          <button class="filter-btn" data-filter="announcement">ANNOUNCEMENT</button>
-          <button class="filter-btn" data-filter="blog">BLOG</button>
-          <button class="filter-btn" data-filter="news">NEWS</button>
+        <div class="nsv4-filter-bar" role="group" aria-label="Filter articles">
+          <button class="nsv4-filter-btn active" data-filter="all">ALL</button>
+          <button class="nsv4-filter-btn" data-filter="announcement">ANNOUNCEMENT</button>
+          <button class="nsv4-filter-btn" data-filter="blog">BLOG</button>
+          <button class="nsv4-filter-btn" data-filter="news">NEWS</button>
         </div>
 
-        <!-- ============ ARTICLE GRID ============ -->
-        <div class="news-grid" id="news-grid">
-          <article class="news-card news-card-wide reveal" data-category="news" data-delay="1">
-            <div class="news-card-visual" style="background-image:url('/assets/backgrounds/texture-20.jpg');" aria-hidden="true"></div>
-            <span class="card-num">NEWS</span>
-            <h3 class="card-title"><a href="/news/the-neuron-podcast">What's Next After GPUs?</a></h3>
-            <p class="card-body">Jeff Shainline, co-founder and CEO of Great Sky, breaks down a radically different future for AI infrastructure on The Neuron - AI News Podcast</p>
-            <div class="news-card-foot">
-              <span class="news-date">27 May 2026</span>
-              <a href="/news/the-neuron-podcast" class="news-read" aria-label="Read: What's Next After GPUs?">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+        <div class="nsv4-grid">
+          <article class="nsv4-card reveal" data-delay="1" data-category="news">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/whats-next-after-gpus.jpg" alt="What's Next After GPUs?" style="object-fit: contain;"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">News</span>
+              <h3 class="nsv4-title"><a href="/news/the-neuron-podcast">What's Next After GPUs?</a></h3>
+              <p class="nsv4-excerpt">Jeff Shainline, co-founder and CEO of Great Sky, breaks down a radically different future for AI infrastructure on The Neuron - AI News Podcast</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">27 May 2026</span>
+                <a href="/news/the-neuron-podcast" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
-          <article class="news-card news-card-brief reveal" data-category="news" data-delay="1">
-            <span class="card-num">NEWS</span>
-            <h3 class="card-title"><a href="/news/ieee-superconductors-and-light-will-transform-ai">Superconductors and Light Will Transform AI</a></h3>
-            <p class="card-body">IEEE article featuring Great Sky. Conventional AI faces growing obstacles because its hardware and algorithms are poorly matched to the mechanisms of biological intelligence, driving high power consumption and making data-intensive tasks far more difficult than they are for humans. Superconducting optoelectronic networks (SOEN) combine superconducting computation with optical communication to implement neural systems more directly.</p>
-            <div class="news-card-foot">
-              <span class="news-date">22 May 2026</span>
-              <a href="/news/ieee-superconductors-and-light-will-transform-ai" class="news-read" aria-label="Read: Superconductors and Light Will Transform AI">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+          <article class="nsv4-card reveal" data-delay="2" data-category="news">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/superconductors-and-light.png" alt="Superconductors and Light Will Transform AI" style="object-fit: contain;"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">News</span>
+              <h3 class="nsv4-title"><a href="/news/ieee-superconductors-and-light-will-transform-ai">Superconductors and Light Will Transform AI</a></h3>
+              <p class="nsv4-excerpt">IEEE article featuring Great Sky. Conventional AI faces growing obstacles because its hardware and algorithms are poorly matched to the mechanisms of biological intelligence, driving high power consumption and making data-intensive tasks far more difficult than they are for humans. Superconducting optoelectronic networks (SOEN) combine superconducting computation with optical communication to implement neural systems more directly.</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">22 May 2026</span>
+                <a href="/news/ieee-superconductors-and-light-will-transform-ai" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
-          <article class="news-card news-card-brief reveal" data-category="blog" data-delay="2">
-            <span class="card-num">BLOG</span>
-            <h3 class="card-title"><a href="/news/soens-in-space">SOENs in Space</a></h3>
-            <p class="card-body">Launching compute into space is an idea that has recently gained attention. Looking closely at the implications, it is clear that superconducting optoelectronic networks (SOENs) bring tremendous advantages relative to conventional computational systems for large-scale AI in space.</p>
-            <div class="news-card-foot">
-              <span class="news-date">24 Mar 2026</span>
-              <a href="/news/soens-in-space" class="news-read" aria-label="Read: SOENs in Space">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+          <article class="nsv4-card reveal" data-delay="3" data-category="blog">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/soens-in-space.jpg" alt="SOENs in Space"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">Blog</span>
+              <h3 class="nsv4-title"><a href="/news/soens-in-space">SOENs in Space</a></h3>
+              <p class="nsv4-excerpt">Launching compute into space is an idea that has recently gained attention. Looking closely at the implications, it is clear that superconducting optoelectronic networks (SOENs) bring tremendous advantages relative to conventional computational systems for large-scale AI in space.</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">24 Mar 2026</span>
+                <a href="/news/soens-in-space" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
-          <article class="news-card reveal" data-category="announcement" data-delay="1">
-            <div class="news-card-visual" style="background-image:url('/assets/backgrounds/texture-45.jpg');" aria-hidden="true"></div>
-            <span class="card-num">ANNOUNCEMENT</span>
-            <h3 class="card-title"><a href="/news/great-sky-ai-emerges-from-nist">Great Sky AI Emerges from NIST: A New Kind of AI Hardware Company</a></h3>
-            <p class="card-body">Ten years in development, new superconducting, optically connected architecture overcomes the limits of GPUs and transformers—unlocking multimodal intelligence operating a million times faster than current approaches</p>
-            <div class="news-card-foot">
-              <span class="news-date">13 Mar 2026</span>
-              <a href="/news/great-sky-ai-emerges-from-nist" class="news-read" aria-label="Read: Great Sky AI Emerges from NIST: A New Kind of AI Hardware Company">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+          <article class="nsv4-card reveal" data-delay="1" data-category="announcement">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/great-sky-emerges-from-nist.jpg" alt="Great Sky AI Emerges from NIST: A New Kind of AI Hardware Company"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">Announcement</span>
+              <h3 class="nsv4-title"><a href="/news/great-sky-ai-emerges-from-nist">Great Sky AI Emerges from NIST: A New Kind of AI Hardware Company</a></h3>
+              <p class="nsv4-excerpt">Ten years in development, new superconducting, optically connected architecture overcomes the limits of GPUs and transformers—unlocking multimodal intelligence operating a million times faster than current approaches</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">13 Mar 2026</span>
+                <a href="/news/great-sky-ai-emerges-from-nist" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
-          <article class="news-card reveal" data-category="blog" data-delay="1">
-            <span class="card-num">BLOG</span>
-            <h3 class="card-title"><a href="/news/building-a-deep-tech-company-what-we-learned-at-nist">The History of Great Sky</a></h3>
-            <p class="card-body">How the National Institute of Standards and Technology (NIST) incubated the team that will transform AI computing</p>
-            <div class="news-card-foot">
-              <span class="news-date">01 Sept 2025</span>
-              <a href="/news/building-a-deep-tech-company-what-we-learned-at-nist" class="news-read" aria-label="Read: The History of Great Sky">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+          <article class="nsv4-card reveal" data-delay="2" data-category="blog">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/history-of-great-sky.png" alt="The History of Great Sky" style="object-fit: contain;"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">Blog</span>
+              <h3 class="nsv4-title"><a href="/news/building-a-deep-tech-company-what-we-learned-at-nist">The History of Great Sky</a></h3>
+              <p class="nsv4-excerpt">How the National Institute of Standards and Technology (NIST) incubated the team that will transform AI computing</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">01 Sept 2025</span>
+                <a href="/news/building-a-deep-tech-company-what-we-learned-at-nist" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
-          <article class="news-card reveal" data-category="blog" data-delay="2">
-            <span class="card-num">BLOG</span>
-            <h3 class="card-title"><a href="/news/perspective-on-deepseek">Perspective on DeepSeek from Great Sky</a></h3>
-            <p class="card-body">The DeepSeek moment sent shockwaves through the AI world. Jeff Shainline unpacks what it actually means — and why it makes the case for Great Sky stronger than ever.</p>
-            <div class="news-card-foot">
-              <span class="news-date">05 Feb 2025</span>
-              <a href="/news/perspective-on-deepseek" class="news-read" aria-label="Read: Perspective on DeepSeek from Great Sky">Read
-                <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+          <article class="nsv4-card reveal" data-delay="3" data-category="blog">
+            <div class="nsv4-visual-wrap"><img class="nsv4-visual" src="/assets/news/perspective-on-deepseek.png" alt="Perspective on DeepSeek from Great Sky"></div>
+            <div class="nsv4-content">
+              <span class="nsv4-tag">Blog</span>
+              <h3 class="nsv4-title"><a href="/news/perspective-on-deepseek">Perspective on DeepSeek from Great Sky</a></h3>
+              <p class="nsv4-excerpt">The DeepSeek moment sent shockwaves through the AI world. Jeff Shainline unpacks what it actually means — and why it makes the case for Great Sky stronger than ever.</p>
+              <div class="nsv4-foot">
+                <span class="nsv4-date">05 Feb 2025</span>
+                <a href="/news/perspective-on-deepseek" class="nsv4-read">Read <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
             </div>
           </article>
         </div>

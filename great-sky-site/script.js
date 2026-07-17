@@ -92,6 +92,23 @@
     });
   }
 
+  /* ---- News: bordered card deck filters ---------------------------------- */
+  var nsv4FilterBtns = document.querySelectorAll(".nsv4-filter-btn");
+  if (nsv4FilterBtns.length) {
+    var nsv4Cards = document.querySelectorAll(".nsv4-card");
+    nsv4FilterBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        nsv4FilterBtns.forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        var filter = btn.getAttribute("data-filter");
+        nsv4Cards.forEach(function (card) {
+          var show = filter === "all" || card.getAttribute("data-category") === filter;
+          card.classList.toggle("nsv4-hidden", !show);
+        });
+      });
+    });
+  }
+
   /* ---- News: subscribe form ----------------------------------------------- */
   /* Front-end only: shows a success state. Wire to the email service
      (Supabase + Resend on the current production stack) before launch. */

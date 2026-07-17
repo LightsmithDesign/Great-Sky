@@ -4,8 +4,9 @@
     {
       "name": "great-sky",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "serve", "great-sky-site", "-l", "4173"],
-      "port": 4173
+      "runtimeArgs": ["-y", "serve", "great-sky-site"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }
