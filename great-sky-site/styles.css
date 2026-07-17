@@ -519,8 +519,8 @@ body.menu-open { overflow: hidden; }
   background-size: cover;
   background-position: center;
 }
-.hero-photo .hero-title,
-.hero-photo .hero-title em { color: var(--cream-0); }
+.hero-photo .hero-title { color: var(--cream-0); }
+.hero-photo .hero-title em { color: var(--stone); }
 .hero-photo .hero-lede {
   color: color-mix(in srgb, var(--cream-1) 88%, transparent);
 }
