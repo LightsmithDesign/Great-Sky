@@ -2762,6 +2762,7 @@ body.menu-open { overflow: hidden; }
 .possible-card-c {
   background: var(--cream-0);
   border: 1px solid var(--hairline);
+  border-radius: 11px;
   padding: clamp(2rem, 4vw, 3rem);
   display: flex;
   flex-direction: column;
