@@ -2929,7 +2929,7 @@ body.menu-open { overflow: hidden; }
   font-family: var(--serif);
   font-size: clamp(2.2rem, 4vw, 3.8rem);
   line-height: 1.1;
-  color: var(--stone);
+  color: var(--ink);
   font-weight: 400;
 }
 .hw-display-title em {
