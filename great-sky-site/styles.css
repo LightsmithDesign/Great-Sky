@@ -513,6 +513,38 @@ body.menu-open { overflow: hidden; }
   opacity: 0;
   animation: fade-in 1.4s var(--ease) 1.1s forwards;
 }
+
+/* Photo-background hero variant */
+.hero-photo {
+  background-size: cover;
+  background-position: center;
+}
+.hero-photo .hero-title,
+.hero-photo .hero-title em { color: var(--cream-0); }
+.hero-photo .hero-lede {
+  color: color-mix(in srgb, var(--cream-1) 88%, transparent);
+}
+.hero-photo .hero-foot {
+  color: color-mix(in srgb, var(--cream-1) 75%, transparent);
+}
+.hero-photo .scroll-line {
+  background: color-mix(in srgb, var(--cream-0) 35%, transparent);
+}
+
+/* Header contrast over a dark photo hero, before the header picks up its scrolled background */
+body.hero-dark .site-header:not(.scrolled) .logo-dark { display: none; }
+body.hero-dark .site-header:not(.scrolled) .logo-cream { display: block; }
+body.hero-dark .site-header:not(.scrolled) .main-nav a { color: color-mix(in srgb, var(--cream-1) 85%, transparent); }
+body.hero-dark .site-header:not(.scrolled) .main-nav a:hover { color: var(--cream-0); }
+body.hero-dark .site-header:not(.scrolled) .main-nav a::after { background: var(--cream-0); }
+body.hero-dark .site-header:not(.scrolled) .btn-small {
+  color: var(--cream-0);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cream-0) 35%, transparent);
+}
+body.hero-dark .site-header:not(.scrolled) .btn-small .btn-orb {
+  background: color-mix(in srgb, var(--cream-0) 16%, transparent);
+}
+body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-0); }
 .hero-scroll {
   margin-left: auto;
   display: inline-flex;

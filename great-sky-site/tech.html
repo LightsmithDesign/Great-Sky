@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;0,500;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body id="top">
+<body id="top" class="hero-dark">
 
   <div class="grain" aria-hidden="true"></div>
 
@@ -77,21 +77,21 @@
         position: relative;
         padding-top: clamp(10rem, 18vh, 14rem);
         padding-bottom: clamp(6rem, 10vw, 8rem);
-        background: linear-gradient(180deg, var(--cream-0) 0%, var(--cream-1) 100%);
+        background-image: url('/assets/backgrounds/hero-tech-bg.jpg');
+        background-size: cover;
+        background-position: center;
         overflow: hidden;
-      }
-      .tech-hero .texture-layer {
-        z-index: 0;
-      }
-      .tech-hero .hero-sky {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
       }
       .tech-hero .container {
         position: relative;
         z-index: 2;
+      }
+      .tech-hero .page-title,
+      .tech-hero .page-title em {
+        color: var(--cream-0);
+      }
+      .tech-hero .page-lede {
+        color: color-mix(in srgb, var(--cream-1) 88%, transparent);
       }
       .tech-hero-grid {
         display: grid;
@@ -111,10 +111,10 @@
       }
       .tech-hero-card {
         position: relative;
-        background: color-mix(in srgb, var(--cream-0) 65%, transparent);
+        background: color-mix(in srgb, var(--ink) 40%, transparent);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--hairline);
+        border: 1px solid color-mix(in srgb, var(--cream-0) 25%, transparent);
         padding: 2.25rem 2rem;
         border-radius: 11px;
         transition: all 0.6s var(--ease);
@@ -125,8 +125,8 @@
         position: absolute;
         width: 8px;
         height: 8px;
-        border: 1px solid var(--olive);
-        opacity: 0.25;
+        border: 1px solid var(--sage);
+        opacity: 0.4;
         transition: all 0.6s var(--ease);
       }
       /* Top-Left Corner Bracket */
@@ -145,26 +145,26 @@
       }
       .tech-hero-card:hover {
         transform: translateY(-4px);
-        border-color: var(--olive);
-        background: color-mix(in srgb, var(--cream-0) 80%, transparent);
-        box-shadow: 0 15px 30px rgba(65, 69, 52, 0.05);
+        border-color: var(--sage);
+        background: color-mix(in srgb, var(--ink) 55%, transparent);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       }
       .tech-hero-card:hover::before,
       .tech-hero-card:hover::after {
-        opacity: 0.8;
-        border-color: var(--olive);
+        opacity: 0.9;
+        border-color: var(--sage);
       }
       .tech-hero-val {
         font-family: var(--mono);
         font-size: clamp(2.4rem, 3.8vw, 3.4rem);
         line-height: 1;
         font-weight: 500;
-        color: var(--olive);
+        color: var(--cream-0);
       }
       .tech-hero-lbl {
         font-family: var(--sans);
         font-size: 0.95rem;
-        color: var(--text-soft);
+        color: color-mix(in srgb, var(--cream-2) 75%, transparent);
         margin-top: 0.5rem;
         line-height: 1.4;
       }
@@ -405,16 +405,6 @@
     </style>
 
     <section class="tech-hero">
-      <div class="texture-layer texture-drift" style="background-image:url('/assets/backgrounds/texture-45.jpg'); opacity:0.4;" aria-hidden="true"></div>
-      <div class="hero-sky" aria-hidden="true">
-        <svg class="sky-arcs" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" fill="none">
-          <g class="arc-group">
-            <circle cx="200" cy="1450" r="780" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 7"/>
-            <circle cx="200" cy="1450" r="1050" stroke="var(--arc)" stroke-width="1"/>
-            <circle cx="200" cy="1450" r="1380" stroke="var(--arc)" stroke-width="1" stroke-dasharray="1 9"/>
-          </g>
-        </svg>
-      </div>
       <div class="container">
         <div class="tech-hero-grid">
           <div class="tech-hero-left">
