@@ -964,6 +964,36 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
+.quote-section {
+  background: #CBCBC3;
+  padding-block: clamp(6.5rem, 12vw, 11rem);
+}
+.quote-text-intro {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: #171D1A;
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.quote-text-main {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: #414534;
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
 .quote-answer {
   margin-top: clamp(3rem, 6vw, 4.5rem);
   display: flex;
