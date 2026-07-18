@@ -3536,7 +3536,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .gallery-narrative-steps {
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 0.8rem;
   margin-top: 1rem;
 }
 
