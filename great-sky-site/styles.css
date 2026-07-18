@@ -3541,7 +3541,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 }
 
 .narrative-step {
-  padding-bottom: 1.8rem;
+  padding-bottom: 0;
 }
 
 .narrative-step .step-num {
