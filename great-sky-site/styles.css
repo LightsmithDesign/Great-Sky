@@ -2210,7 +2210,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 }
 
 .value-card {
-  background: #B3B5A9;
+  background: #AAACA1;
   border: none;
   border-radius: 11px;
   padding: clamp(2rem, 3vw, 2.5rem);
@@ -2274,7 +2274,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 
 .value-card-title em {
   font-style: italic;
-  color: var(--sage);
+  color: #DBDECC;
 }
 
 /* Layout B (Architectural Columns Variation) */
@@ -2328,7 +2328,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   justify-content: flex-start;
   gap: 1.75rem;
   min-height: 260px;
-  background: #B3B5A9;
+  background: #AAACA1;
   overflow: hidden;
   transition: background-color 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.8s var(--ease);
 }
@@ -2413,7 +2413,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 
 .value-col-title em {
   font-style: italic;
-  color: var(--sage);
+  color: #DBDECC;
 }
 
 .value-col-desc {
