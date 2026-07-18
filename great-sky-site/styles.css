@@ -620,7 +620,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 
 /* Section tints */
 .section-intro { background: var(--cream-0); }
-.section-wall { background: var(--cream-2); }
+.section-wall { background: #F3EEE8; }
 .section-brain { background: var(--cream-1); }
 .section-capabilities { background: var(--cream-2); }
 #openings { background: #FAF8F5; }
