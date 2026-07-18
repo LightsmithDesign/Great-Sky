@@ -554,7 +554,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .scroll-line {
   width: 3.4rem;
   height: 1px;
-  background: color-mix(in srgb, var(--ink) 22%, transparent);
+  background: #707070;
   position: relative;
   overflow: hidden;
 }
