@@ -528,7 +528,7 @@ body.menu-open { overflow: hidden; }
   color: color-mix(in srgb, var(--cream-1) 75%, transparent);
 }
 .hero-photo .scroll-line {
-  background: color-mix(in srgb, var(--cream-0) 35%, transparent);
+  background: #707070;
 }
 
 /* Header contrast over a dark photo hero, before the header picks up its scrolled background */
