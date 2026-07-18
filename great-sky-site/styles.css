@@ -918,6 +918,13 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   margin-top: 0;
 }
 .page-title em { font-style: italic; color: var(--olive); }
+.page-hero-photo {
+  background-size: cover;
+  background-position: center;
+}
+.page-hero-photo .page-title { color: var(--cream-0); }
+.page-hero-photo .page-title em { color: var(--stone); }
+.page-hero-photo .page-lede { color: color-mix(in srgb, var(--cream-1) 88%, transparent); }
 .page-lede {
   margin-top: 2rem;
   font-size: clamp(1.1rem, 1.4vw, 1.3rem);
