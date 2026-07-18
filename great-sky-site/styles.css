@@ -409,7 +409,7 @@ body.menu-open { overflow: hidden; }
 
 .hero {
   position: relative;
-  min-height: 100dvh;
+  min-height: clamp(20rem, 60vh, 90vh);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -922,6 +922,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .page-hero-photo {
   background-size: cover;
   background-position: center;
+  min-height: clamp(20rem, 60vh, 90vh);
 }
 .page-hero-photo .page-title { color: var(--cream-0); }
 .page-hero-photo .page-title em { color: var(--stone); }
@@ -1471,7 +1472,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   color: var(--olive);
 }
 .newsstand-photo {
-  padding-block: clamp(9rem, 16vh, 13rem);
+  min-height: clamp(20rem, 60vh, 90vh);
   background-size: cover;
   background-position: center;
 }
