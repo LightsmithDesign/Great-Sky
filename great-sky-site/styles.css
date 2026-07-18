@@ -1470,6 +1470,20 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   font-style: italic;
   color: var(--olive);
 }
+.newsstand-photo {
+  padding-block: clamp(9rem, 16vh, 13rem);
+  background-size: cover;
+  background-position: center;
+}
+.newsstand-title-light {
+  color: var(--cream-0);
+}
+.newsstand-title-light em {
+  color: var(--stone);
+}
+.newsstand-lede-light {
+  color: color-mix(in srgb, var(--cream-1) 85%, transparent) !important;
+}
 .newsstand-lede {
   color: var(--text-soft);
   font-size: clamp(1rem, 1.35vw, 1.2rem);
