@@ -1461,7 +1461,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .newsstand-title {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(3.8rem, 10vw, 8.8rem);
+  font-size: clamp(2.55rem, 10vw, 7.55rem);
   line-height: 0.92;
   letter-spacing: -0.025em;
   text-wrap: balance;
