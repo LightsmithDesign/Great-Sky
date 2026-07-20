@@ -631,17 +631,13 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 }
 .section-olive { background: var(--olive); }
 
-/* Architecture section with stone background */
-#architecture {
-  background: var(--stone) !important;
-  color: var(--ink) !important;
-}
-#architecture .display { color: var(--ink) !important; }
-#architecture .display em { color: var(--ink) !important; }
-#architecture .arch-tag { color: color-mix(in srgb, var(--ink) 65%, transparent) !important; }
-#architecture .arch-name { color: var(--ink) !important; }
-#architecture .arch-body { color: color-mix(in srgb, var(--ink) 70%, transparent) !important; }
-#architecture .arch-col { border-top-color: color-mix(in srgb, var(--ink) 22%, transparent) !important; }
+/* Architecture section with photo background */
+.arch-photo .display { color: var(--cream-0); }
+.arch-photo .display em { color: var(--cream-3); }
+.arch-photo .arch-tag { color: color-mix(in srgb, var(--cream-2) 60%, transparent); }
+.arch-photo .arch-name { color: var(--cream-1); }
+.arch-photo .arch-body { color: color-mix(in srgb, var(--cream-2) 70%, transparent); }
+.arch-photo .arch-col { border-top-color: color-mix(in srgb, var(--cream-2) 22%, transparent); }
 
 /* ---- 02 The Wall -------------------------------------------------------- */
 .wall-columns {
