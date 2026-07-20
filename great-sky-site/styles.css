@@ -1371,6 +1371,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .job-link {
   display: inline-flex;
   align-items: center;
+  justify-self: start;
   gap: 0.6rem;
   font-size: 0.88rem;
   font-weight: 500;
@@ -1379,6 +1380,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 }
 .job-link .cap-arrow {
   width: 2.2rem; height: 2.2rem;
+  flex-shrink: 0;
   border-color: color-mix(in srgb, var(--cream-2) 25%, transparent);
   color: var(--cream-1);
 }
