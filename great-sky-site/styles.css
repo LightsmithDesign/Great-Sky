@@ -598,9 +598,9 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 }
 #architecture .section-head::after {
   background: color-mix(in srgb, var(--cream-2) 16%, transparent);
-  transform: scaleX(0);
+  transform: scaleX(1);
   transform-origin: left;
-  animation: draw-wave 1.3s var(--ease) forwards;
+  animation: underline-sweep 1.3s var(--ease) forwards;
 }
 #architecture .waveguide {
   display: none;
