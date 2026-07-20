@@ -976,6 +976,9 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
+.fuel-economy-photo .quote-text {
+  color: var(--cream-0);
+}
 .quote-section {
   background: #CBCBC3;
   padding-block: clamp(6.5rem, 12vw, 11rem);
