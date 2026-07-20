@@ -596,6 +596,15 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .section-dark .section-head::after {
   background: color-mix(in srgb, var(--cream-2) 16%, transparent);
 }
+#architecture .section-head::after {
+  background: color-mix(in srgb, var(--cream-2) 16%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: draw-wave 1.3s var(--ease) forwards;
+}
+#architecture .waveguide {
+  display: none;
+}
 
 .split {
   display: grid;
