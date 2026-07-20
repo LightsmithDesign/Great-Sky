@@ -603,6 +603,7 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 #architecture .waveguide {
   margin-top: 0;
   margin-bottom: clamp(3.5rem, 7vw, 6rem);
+  color: color-mix(in srgb, var(--cream-2) 22%, transparent);
 }
 
 .split {
