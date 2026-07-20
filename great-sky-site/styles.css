@@ -637,8 +637,9 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
 .section-olive { background: var(--olive); }
 
 /* Architecture section with photo background */
+.arch-photo { padding-block: clamp(5rem, 9vw, 8.5rem); }
 .arch-photo .display { color: var(--cream-0); }
-.arch-photo .display em { color: var(--cream-3); }
+.arch-photo .display em { color: #CBCBC3; }
 .arch-photo .arch-tag { color: color-mix(in srgb, var(--cream-2) 60%, transparent); }
 .arch-photo .arch-name { color: var(--cream-1); }
 .arch-photo .arch-body { color: color-mix(in srgb, var(--cream-2) 70%, transparent); }
