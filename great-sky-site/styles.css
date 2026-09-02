@@ -3661,3 +3661,25 @@ body.hero-dark .site-header:not(.scrolled) .menu-line { background: var(--cream-
     aspect-ratio: 4 / 3;
   }
 }
+
+/* ---- Form error message -------------------------------------------------- */
+.form-error {
+  display: none;
+  margin-top: 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #8C3A25;
+  border-left: 2px solid #8C3A25;
+  padding: 0.55rem 0 0.55rem 0.85rem;
+  background: color-mix(in srgb, #8C3A25 6%, transparent);
+}
+.form-error.visible { display: block; }
+.form-error-light {
+  margin-inline: auto;
+  max-width: 30em;
+  text-align: left;
+  color: #E8B4A4;
+  border-left-color: #E8B4A4;
+  background: color-mix(in srgb, #E8B4A4 10%, transparent);
+}
+.btn[disabled] { opacity: 0.55; pointer-events: none; }

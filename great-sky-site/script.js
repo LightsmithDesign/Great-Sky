@@ -109,35 +109,127 @@
     });
   }
 
-  /* ---- News: subscribe form ----------------------------------------------- */
-  /* Front-end only: shows a success state. Wire to the email service
-     (Supabase + Resend on the current production stack) before launch. */
-  var subscribeForm = document.getElementById("subscribe-form");
-  if (subscribeForm) {
-    subscribeForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = subscribeForm.querySelector(".subscribe-input");
-      if (!input.value || !input.checkValidity()) { input.focus(); return; }
-      subscribeForm.innerHTML =
-        '<p class="lede" style="text-align:center; width:100%; color: var(--cream-1);">Thank you — you’re on the list.</p>';
+  /* ---- Form submission (Formspree) ---------------------------------------
+     SETUP: create two forms at formspree.io, then paste their IDs below.
+     A Formspree endpoint looks like  https://formspree.io/f/xnqkldwr
+     — you only need the last part ("xnqkldwr").
+     Note: formspree.io must also stay allowed in the Content-Security-Policy
+     "connect-src" directive in vercel.json.                                  */
+  var FORMSPREE = {
+    contact:   "YOUR_CONTACT_FORM_ID",
+    subscribe: "YOUR_SUBSCRIBE_FORM_ID"
+  };
+
+  function endpointFor(key) {
+    var id = FORMSPREE[key];
+    if (!id || id.indexOf("YOUR_") === 0) return null;
+    return "https://formspree.io/f/" + id;
+  }
+
+  function postForm(url, formData) {
+    return fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    }).then(function (res) {
+      if (res.ok) return true;
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        var msg = (data && data.errors && data.errors.length)
+          ? data.errors.map(function (er) { return er.message; }).join(", ")
+          : "Something went wrong. Please try again, or email us directly.";
+        throw new Error(msg);
+      });
     });
   }
 
-  /* ---- Contact form -------------------------------------------------------- */
-  /* Front-end only: shows a success state. Wire to the form backend
-     (Supabase on the current production stack) before launch. */
+  function setBusy(btn, busy, busyLabel, idleLabel) {
+    if (!btn) return;
+    var label = btn.querySelector("span");
+    btn.disabled = busy;
+    btn.setAttribute("aria-busy", busy ? "true" : "false");
+    if (label) label.textContent = busy ? busyLabel : idleLabel;
+  }
+
+  function showError(el, message) {
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add("visible");
+  }
+
+  function clearError(el) {
+    if (!el) return;
+    el.textContent = "";
+    el.classList.remove("visible");
+  }
+
+  /* ---- News: subscribe form ---------------------------------------------- */
+  var subscribeForm = document.getElementById("subscribe-form");
+  if (subscribeForm) {
+    var subBtn = subscribeForm.querySelector('button[type="submit"]');
+    var subError = document.getElementById("subscribe-error");
+
+    subscribeForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      clearError(subError);
+
+      var input = subscribeForm.querySelector(".subscribe-input");
+      if (!input.value || !input.checkValidity()) { input.focus(); return; }
+
+      var url = endpointFor("subscribe");
+      if (!url) {
+        showError(subError, "Subscriptions are not connected yet. Please check back soon.");
+        return;
+      }
+
+      setBusy(subBtn, true, "Sending", "Subscribe");
+      postForm(url, new FormData(subscribeForm))
+        .then(function () {
+          subscribeForm.innerHTML =
+            '<p class="lede" style="text-align:center; width:100%; color: var(--cream-1);">' +
+            'Thank you — you’re on the list.</p>';
+        })
+        .catch(function (err) {
+          setBusy(subBtn, false, "Sending", "Subscribe");
+          showError(subError, err.message);
+        });
+    });
+  }
+
+  /* ---- Contact form ------------------------------------------------------- */
   var contactForm = document.getElementById("contact-form");
   if (contactForm) {
+    var contactBtn = contactForm.querySelector('button[type="submit"]');
+    var contactError = document.getElementById("form-error");
+
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+      clearError(contactError);
+
       var honeypot = contactForm.querySelector('[name="website"]');
-      if (honeypot && honeypot.value) return;
+      if (honeypot && honeypot.value) return;           /* silently drop bots */
+
       if (!contactForm.checkValidity()) {
         contactForm.reportValidity();
         return;
       }
-      contactForm.style.display = "none";
-      document.getElementById("form-success").classList.add("visible");
+
+      var url = endpointFor("contact");
+      if (!url) {
+        showError(contactError,
+          "This form is not connected yet. Please email us directly in the meantime.");
+        return;
+      }
+
+      setBusy(contactBtn, true, "Sending", "Send Message");
+      postForm(url, new FormData(contactForm))
+        .then(function () {
+          contactForm.style.display = "none";
+          document.getElementById("form-success").classList.add("visible");
+        })
+        .catch(function (err) {
+          setBusy(contactBtn, false, "Sending", "Send Message");
+          showError(contactError, err.message);
+        });
     });
   }
 

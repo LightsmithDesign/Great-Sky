@@ -248,12 +248,13 @@
         <h2 class="display display-center reveal">Follow the <em>Work</em></h2>
         <p class="lede reveal" data-delay="1" style="margin-inline: auto; margin-top: 1.8rem; color: color-mix(in srgb, var(--cream-2) 72%, transparent); max-width: 30em; text-wrap: pretty;">We publish infrequently but substantively. Subscribe to receive new articles, research updates, and company announcements directly.</p>
         <form class="subscribe-form reveal" data-delay="2" id="subscribe-form" novalidate>
-          <input type="email" class="subscribe-input" placeholder="Your email address" aria-label="Email address" required>
+          <input type="email" name="email" class="subscribe-input" placeholder="Your email address" aria-label="Email address" required>
           <button type="submit" class="btn btn-pill btn-cream">
             <span>Subscribe</span>
             <span class="btn-orb" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
         </form>
+        <p class="form-error form-error-light" id="subscribe-error" role="alert" aria-live="polite"></p>
       </div>
     </section>
 
